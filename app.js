@@ -1,18 +1,11 @@
 var express = require('express');
-var stormpath = require('express-stormpath');
-
+var http = require('http');
 var app = express();
-app.set('views', './views');
-app.set('view engine', 'jade');
-app.use(stormpath.init(app));
 
-app.get('/', function(req, res) {
-  res.render('home', {
-    title: 'Welcome'
-  });
+// set up routes
+
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log("Listening on port " + port);
 });
-
-app.use('/profile', stormpath.loginRequired, require('./profile')());
-
-app.listen(3000);
 
