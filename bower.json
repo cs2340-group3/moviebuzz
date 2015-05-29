@@ -1,0 +1,27 @@
+{
+  "name": "moviebuzz",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cs2340-group3/moviebuzz",
+  "authors": [
+    "Kimberly Caras <kcaras6@gatech.edu>",
+    "Tim Vergenz <vergenzt@gatech.edu>",
+    "Tian-Yo Yang <tyang82@gatech.edu>",
+    "Haufeng Zhang <hzhang385@gatech.edu>",
+    "Elyes Graba <elyesgraba@gatech.edu>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-strap": "2.2.3",
+    "angular": "1.4.0",
+    "angular-route": "1.4.0",
+    "bootstrap": "3.3.4",
+    "angular-ui-router": "0.2.15"
+  }
+}
