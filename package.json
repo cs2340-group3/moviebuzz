@@ -1,7 +1,7 @@
 {
   "name": "moviebuzz",
   "version": "0.0.0",
-  "description": "Website project for CS 2340, summer 2015.",
+  "description": "Website project for CS 2340, Summer 2015.",
   "main": "app.js",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
     "Kimberly Caras <kcaras6@gatech.edu>",
     "Tim Vergenz <vergenzt@gatech.edu>",
     "Tian-Yo Yang <tyang82@gatech.edu>",
-    "Haufeng Zhang <hzhang385@gatech.edu>",
+    "Haofeng Zhang <hzhang385@gatech.edu>",
     "Elyes Graba <elyesgraba@gatech.edu>"
   ],
   "license": "MIT",
