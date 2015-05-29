@@ -1,6 +1,10 @@
 var express = require('express')
   , app = express()
-  , mongoose = require('mongoose');
+  , mongoose = require('mongoose')
+  , port = process.env.PORT || 3000 // port 3000 as default
+  , bodyParser = require('body-parser')
+  , morgan = require('morgan')
+  , cookieParser = require('cookieParser');
 
 // Import MongoDB configuration
 var DB = require('./config/database')
@@ -8,11 +12,15 @@ var DB = require('./config/database')
 // Use the configuration to connect database
 mongoose.connect(DB.url);
 
+// set up express middlewares
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser());
+
 app.get('/', function(req, res) {
   res.send('Hello, world!');
 });
 
-var port = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log('Listening on port ' + port);
 });
@@ -29,3 +37,4 @@ app.listen(port, function() {
 //p.save(function(err) {
   //if (!err) console.log('Success!');
 //})
+
