@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/cs2340-group3/moviebuzz",
   "dependencies": {
-    "express": "4.12.4",
+    "express": "4.12.4"
   }
 }
