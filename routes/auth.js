@@ -20,13 +20,23 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', function(req, res, next) {
+  // TODO: Implement 3-time failure restriction
+  // and check if it's a locked or banned account
+  // We should probably do it here, before going
+  // to the authentication. Otherwise, we can look
+  // into the library source code and customize it.
+  // Also, a new field, number of failures, may be
+  // added to the User model.
+  //
+  // Note: use req.body.username to get username
+  // and User.findOne() to query database
   passport.authenticate('local',
     function(err, user, info) {
       if (err) {
         return next(err); // will generate a 500 error
       }
       if (!user) {
-        return res.render('login', {message: info.message});
+        return res.render('login', { message: info.message });
       }
       req.login(user, function(err) {
         if(err) {
