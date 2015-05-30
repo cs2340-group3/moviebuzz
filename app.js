@@ -7,6 +7,7 @@ var express = require('express')
   , cookieParser = require('cookie-parser')
   , expressSession = require('express-session')
   , csrf = require('csurf')
+  , favicon = require('serve-favicon')
   , handlebars  = require('express-handlebars');
 
 // Load configuration and routes
@@ -15,11 +16,14 @@ var port = process.env.PORT || 3000 // port 3000 as default
   , DB = require('./config/database')
   , authRoutes = require('./routes/auth');
 
-// set up express middlewares
+// Set up express middlewares
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for csurf)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Set up favicon of gatech.edu
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 // Initiate Passport.js for authentication
 app.use(expressSession({
@@ -37,7 +41,7 @@ app.use(passport.session());
 // Use CSRF Protection
 app.use(csrf());
 
-// enable handlebars template engine
+// Enable handlebars template engine
 var hbs = handlebars.create({defaultLayout: 'main'});
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -53,7 +57,18 @@ app.use('/', authRoutes);
 app.use(function (err, req, res, next) {
   if (err.code !== 'EBADCSRFTOKEN') return next(err)
   res.status(403)
-  res.render('error', { message: 'Form tempered with' });
+  res.render('error', {
+    message: 'Form tempered with'
+  });
+});
+
+// General error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+  });
 });
 
 app.listen(port, function() {
