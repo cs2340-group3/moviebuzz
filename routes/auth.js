@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
 
 router.get('/login', function(req, res) {
   if(req.session.passport.user === undefined) {
-    res.render('login');
+    res.render('login', { csrfToken: req.csrfToken() });
   } else {
     res.redirect('/profile');
   }
@@ -38,11 +38,10 @@ router.post('/login', function(req, res, next) {
   }
 );
 
-
 router.route('/register')
   .get(function(req, res) {
     req.logout();
-    res.render('register');
+    res.render('register', { csrfToken: req.csrfToken() });
   })
   .post(function(req, res, next) {
     User.register(new User({ username: req.body.username }),
@@ -53,7 +52,6 @@ router.route('/register')
         );
         return next(err);
       }
-      console.log('user registered!');
       passport.authenticate('local')(req, res, function() {
         res.redirect('/');
       });
