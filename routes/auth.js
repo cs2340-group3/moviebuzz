@@ -26,9 +26,9 @@ router.post('/login', function(req, res, next) {
         return next(err); // will generate a 500 error
       }
       if (!user) {
-        return res.render('login', {message : info.message });
+        return res.render('login', {message: info.message});
       }
-      req.login(user, function(err){
+      req.login(user, function(err) {
         if(err) {
           return next(err);
         }

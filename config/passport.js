@@ -1,5 +1,5 @@
 var passport = require('passport')
-  , User = require('../models/user').User
+  , User = require('../models/user')
   , LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(User.authenticate()));
