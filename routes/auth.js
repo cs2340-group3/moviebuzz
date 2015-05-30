@@ -49,7 +49,7 @@ router.route('/register')
                   req.body.password, function(err) {
       if (err) {
         return res.render("register",
-          {msg: "Sorry. That username already exists. Try again."}
+          {message: "Sorry. That username already exists. Try again."}
         );
         return next(err);
       }
