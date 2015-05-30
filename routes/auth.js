@@ -54,8 +54,7 @@ router.route('/register')
     res.render('register', { csrfToken: req.csrfToken() });
   })
   .post(function(req, res, next) {
-    User.register(new User({ username: req.body.username }),
-                  req.body.password, function(err) {
+    User.register(new User({ username: req.body.username }), req.body.password, function(err) {
       if (err) {
         return res.render("register",
           {message: err}
