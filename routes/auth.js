@@ -49,10 +49,11 @@ router.route('/register')
                   req.body.password, function(err) {
       if (err) {
         return res.render("register",
-          {message: "Sorry. That username already exists. Try again."}
+          {message: err}
         );
         return next(err);
       }
+      console.log('user registered!');
       passport.authenticate('local')(req, res, function() {
         res.redirect('/');
       });

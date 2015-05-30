@@ -12,7 +12,6 @@ var UserSchema = new Schema({
   },
   password: {
     type: String
-    , required: true
   },
   date_created: { // when the user created his account
     type: Date
