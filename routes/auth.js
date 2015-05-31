@@ -60,7 +60,7 @@ router.route('/register')
       function(err) {
         if (err) {
           return res.render("register", { message: err });
-        return next(err);
+          // return next(err);
         }
         passport.authenticate('local')(req, res, function() {
         res.redirect('/');
