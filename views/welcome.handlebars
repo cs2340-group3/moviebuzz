@@ -3,8 +3,15 @@
 <ul>
   {{#if user}}
     <li><a href="/profile">Profile</a></li>
+  {{else}}
+    <li><a href="/login">Login</a></li>
+    <li><a href="/register">Register</a></li>
   {{/if}}
-  <li><a href="/login">Login</a></li>
-  <li><a href="/register">Register</a></li>
 </ul>
+
+{{#if user}}
+  <form name="logout_form" method="get" action="/logout">
+    <input name="submit_logout" type="submit" value="Logout">
+  </form>
+{{/if}}
 
