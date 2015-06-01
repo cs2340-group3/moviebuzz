@@ -54,17 +54,19 @@ router.route('/register')
     res.render('register', { csrfToken: req.csrfToken() });
   })
   .post(function(req, res, next) {
-    User.register(new User({ username: req.body.username }), req.body.password, function(err) {
-      if (err) {
-        return res.render("register",
-          {message: err}
-        );
-        return next(err);
-      }
-      passport.authenticate('local')(req, res, function() {
+    User.register(
+      new User({ username: req.body.username }),
+      req.body.password,
+      function(err) {
+        if (err) {
+          return res.render("register", { message: err });
+          // return next(err);
+        }
+        passport.authenticate('local')(req, res, function() {
         res.redirect('/');
-      });
-    });
+        });
+      }
+    );
   });
 
 router.get('/logout', function(req, res) {
