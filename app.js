@@ -1,20 +1,14 @@
 // Load libraries
-var express = require('express')
-  , app = express()
-  , mongoose = require('mongoose')
-  , bodyParser = require('body-parser')
-  , morgan = require('morgan')
-  , cookieParser = require('cookie-parser')
-  , expressSession = require('express-session')
-  , csrf = require('csurf')
-  , favicon = require('serve-favicon')
-  , handlebars  = require('express-handlebars');
-
-// Load configuration and routes
-var port = process.env.PORT || 3000 // port 3000 as default
-  , passport = require('./config/passport')
-  , DB = require('./config/database')
-  , authRoutes = require('./routes/auth');
+var express = require('express');
+var app = express();
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var cookieParser = require('cookie-parser');
+var expressSession = require('express-session');
+var csrf = require('csurf');
+var favicon = require('serve-favicon');
+var handlebars  = require('express-handlebars');
 
 // Set up express middlewares
 app.use(morgan('dev')); // log every request to the console
@@ -35,6 +29,7 @@ app.use(expressSession({
     , secure: false // this can be set only if HTTPS
   }
 }));
+var passport = require('./config/passport')
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -48,9 +43,11 @@ app.set('view engine', 'handlebars');
 app.enable('view cache');
 
 // Use the configuration to connect database
+var DB = require('./config/database')
 mongoose.connect(DB.url);
 
 // Ready to authenticate when a user comes to index page
+var authRoutes = require('./routes/auth');
 app.use('/', authRoutes);
 
 // CSURF error handler
@@ -71,6 +68,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+var port = process.env.PORT || 3000; // port 3000 as default
 app.listen(port, function() {
   console.log('Listening on port ' + port);
 });
