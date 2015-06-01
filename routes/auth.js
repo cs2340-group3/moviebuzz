@@ -3,14 +3,6 @@ var express = require('express')
   , passport = require('passport')
   , router = express.Router();
 
-router.get('/', function(req, res) {
-  if(req.session.passport.user === undefined) {
-    res.redirect('/login');
-  } else {
-    res.redirect('/profile');
-  }
-});
-
 router.get('/login', function(req, res) {
   if(req.session.passport.user === undefined) {
     res.render('login', { csrfToken: req.csrfToken() });
