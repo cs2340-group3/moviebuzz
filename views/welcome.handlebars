@@ -1,6 +1,9 @@
 <h1>Welcome to MovieBuzz!</h1>
 
 <ul>
+  {{#if user}}
+    <li><a href="/profile">Profile</a></li>
+  {{/if}}
   <li><a href="/login">Login</a></li>
   <li><a href="/register">Register</a></li>
 </ul>
