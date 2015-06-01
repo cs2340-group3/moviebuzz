@@ -37,7 +37,7 @@ router.post('/login', function(req, res, next) {
         if(err) {
           return next(err);
         }
-        return res.redirect('/profile')
+        return res.redirect('/')
       });
     })(req, res, next);
   }
