@@ -36,7 +36,10 @@ router.post('/login', function(req, res, next) {
         return next(err); // will generate a 500 error
       }
       if (!user) {
-        return res.render('login', { message: info.message });
+        return res.render('login', {
+          message: info.message
+          , csrfToken: req.csrfToken()
+        });
       }
       req.login(user, function(err) {
         if(err) {
@@ -59,8 +62,10 @@ router.route('/register')
       req.body.password,
       function(err) {
         if (err) {
-          return res.render("register", { message: err });
-          // return next(err);
+          return res.render("register", {
+            message: err
+            , csrfToken: req.csrfToken()
+          });
         }
         passport.authenticate('local')(req, res, function() {
         res.redirect('/');
@@ -78,7 +83,7 @@ router.get('/profile', function(req, res) {
   if(req.session.passport.user === undefined) {
     res.redirect('/login');
   } else {
-    res.render('profile', {username: req.user.username});
+    res.render('profile', { username: req.user.username });
   }
 });
 
