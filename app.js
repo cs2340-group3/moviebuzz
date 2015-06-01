@@ -1,11 +1,74 @@
+// Load libraries
 var express = require('express');
 var app = express();
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var cookieParser = require('cookie-parser');
+var expressSession = require('express-session');
+var csrf = require('csurf');
+var favicon = require('serve-favicon');
+var handlebars  = require('express-handlebars');
 
-app.get('/', function(req, res) {
-  res.send('Hello, world!');
+// Set up express middlewares
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for csurf)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Set up favicon of gatech.edu
+app.use(favicon(__dirname + '/public/favicon.ico'));
+
+// Initiate Passport.js for authentication
+app.use(expressSession({
+  secret: 'testexpresssession'
+  , resave: true
+  , saveUninitialized: false
+  , cookie: {
+    httpOnly: true
+    , secure: false // this can be set only if HTTPS
+  }
+}));
+var passport = require('./config/passport')
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Use CSRF Protection
+app.use(csrf());
+
+// Enable handlebars template engine
+var hbs = handlebars.create({defaultLayout: 'main'});
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+app.enable('view cache');
+
+// Use the configuration to connect database
+var DB = require('./config/database')
+mongoose.connect(DB.url);
+
+// Ready to authenticate when a user comes to index page
+var authRoutes = require('./routes/auth');
+app.use('/', authRoutes);
+
+// CSURF error handler
+app.use(function (err, req, res, next) {
+  if (err.code !== 'EBADCSRFTOKEN') return next(err)
+  res.status(403)
+  res.render('error', {
+    message: 'Form tempered with'
+  });
 });
 
-var port = process.env.PORT || 3000;
+// General error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+  });
+});
+
+var port = process.env.PORT || 3000; // port 3000 as default
 app.listen(port, function() {
   console.log('Listening on port ' + port);
 });
