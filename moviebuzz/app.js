@@ -46,6 +46,10 @@ app.enable('view cache');
 var DB = require('./config/database')
 mongoose.connect(DB.url);
 
+// Show the welcome page when a user comes to index.
+var mainRoutes = require('./routes/main');
+app.use('/', mainRoutes);
+
 // Ready to authenticate when a user comes to index page
 var authRoutes = require('./routes/auth');
 app.use('/', authRoutes);
