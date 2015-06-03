@@ -50,10 +50,20 @@ router.route('/register')
   })
   .post(function(req, res, next) {
     var regEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    if ((req.body.password === req.body.confirmPassword)) {	
-    if (regEx.test(req.body.email)) {
+    	if (req.body.password !== req.body.confirmPassword) {
+    		return res.render("register", {
+   	 			message: "Error: Your password entries did not match"
+   	 			, csrfToken: req.csrfToken()
+   	 		});
+   	 	} else if (!regEx.test(req.body.email)) {
+   	 		return res.render("register", {
+   	 			message: "Error: The email address you submitted is invalid"
+   	 			, csrfToken: req.csrfToken()
+   	 		});
+   	 	}
+    	
     	User.register(
-      		new User({ username: req.body.username }),
+      		new User({ username: req.body.username, email: req.body.email }),
       		req.body.password,
       		function(err) {
         		if (err) {
@@ -66,23 +76,7 @@ router.route('/register')
         		res.redirect('/');
        	 	});
       		}
-   	 	);
-   	 } else {
-   	 
-   	 	return res.render("register", {
-   	 		message: "Error: Your email was not valid"
-   	 		, csrfToken: req.csrfToken()
-   	 	});
-   	 
-   	 }
-   	 } else {
-   	 
-   	 	return res.render("register", {
-   	 		message: "Error: Your password entries did not match"
-   	 		, csrfToken: req.csrfToken()
-   	 	});
-   	 
-   	 }
+   	 	);	
   });
 
 router.get('/logout', function(req, res) {
