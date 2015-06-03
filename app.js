@@ -15,6 +15,7 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for csurf)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('public/'));
 
 // Set up favicon of gatech.edu
 app.use(favicon(__dirname + '/public/favicon.ico'));
