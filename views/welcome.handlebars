@@ -1,17 +1,13 @@
 <h1>Welcome to MovieBuzz!</h1>
 
-<ul>
-  {{#if user}}
-    <li><a href="/profile">Profile</a></li>
-  {{else}}
-    <li><a href="/login">Login</a></li>
-    <li><a href="/register">Register</a></li>
-  {{/if}}
-</ul>
+<h3>
+  <button type="button" class="btn btn-default btn-lg">LOGIN</button>
+</h3>
+<h4>
+  <button type="button" class="btn btn-default btn-lg">REGISTER</button>
+</h4>
 
-{{#if user}}
-  <form name="logout_form" method="get" action="/logout">
-    <input name="submit_logout" type="submit" value="Logout">
-  </form>
-{{/if}}
+<h5>
+  <img src="http://www.news.gatech.edu/sites/default/files/uploads/mercury_images/ta_dah_buzz_2_buld_copy_copy_0.jpg" alt="Klematis" width="300" height="300">
+</h5>
 
