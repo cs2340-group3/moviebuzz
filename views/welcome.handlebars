@@ -1,6 +1,11 @@
 <h1>Welcome to MovieBuzz!</h1>
 
-<h3>
+
+<ul>
+  {{#if user}}
+    <li><a href="/profile">Profile</a></li>
+  {{else}}
+  <h3>
   <form action = "login">
   <input type="submit" class="btn btn-default btn-lg" value = "LOGIN"></input>
   </form>
@@ -14,4 +19,14 @@
 <h5>
   <img src="http://www.news.gatech.edu/sites/default/files/uploads/mercury_images/ta_dah_buzz_2_buld_copy_copy_0.jpg" alt="Klematis" width="300" height="300">
 </h5>
+    
+  {{/if}}
+</ul>
+
+{{#if user}}
+  <form name="logout_form" method="get" action="/logout">
+    <input name="submit_logout" type="submit" value="Logout">
+  </form>
+{{/if}}
+
 

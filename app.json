@@ -1,0 +1,15 @@
+{
+  "name":"moviebuzz",
+  "scripts":{},
+  "env":{
+    "ROTTEN_API_KEY":{
+      "required":true
+    },
+    "MONGOLAB_URL":{
+      "required":true
+    }
+  },
+  "addons":[
+    "mongolab"
+  ]
+}
