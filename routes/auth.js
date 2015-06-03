@@ -49,21 +49,40 @@ router.route('/register')
     res.render('register', { csrfToken: req.csrfToken() });
   })
   .post(function(req, res, next) {
-    User.register(
-      new User({ username: req.body.username }),
-      req.body.password,
-      function(err) {
-        if (err) {
-          return res.render("register", {
-            message: err
-            , csrfToken: req.csrfToken()
-          });
-        }
-        passport.authenticate('local')(req, res, function() {
-        res.redirect('/');
-        });
-      }
-    );
+    var regEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    if ((req.body.password === req.body.confirmPassword)) {	
+    if (regEx.test(req.body.email)) {
+    	User.register(
+      		new User({ username: req.body.username }),
+      		req.body.password,
+      		function(err) {
+        		if (err) {
+          		return res.render("register", {
+            		message: err
+            		, csrfToken: req.csrfToken()
+          		});
+        		}
+        		passport.authenticate('local')(req, res, function() {
+        		res.redirect('/');
+       	 	});
+      		}
+   	 	);
+   	 } else {
+   	 
+   	 	return res.render("register", {
+   	 		message: "Error: Your email was not valid"
+   	 		, csrfToken: req.csrfToken()
+   	 	});
+   	 
+   	 }
+   	 } else {
+   	 
+   	 	return res.render("register", {
+   	 		message: "Error: Your password entries did not match"
+   	 		, csrfToken: req.csrfToken()
+   	 	});
+   	 
+   	 }
   });
 
 router.get('/logout', function(req, res) {
