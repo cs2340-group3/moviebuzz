@@ -49,34 +49,34 @@ router.route('/register')
     res.render('register', { csrfToken: req.csrfToken() });
   })
   .post(function(req, res, next) {
-    var regEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    	if (req.body.password !== req.body.confirmPassword) {
-    		return res.render("register", {
-   	 			message: "Error: Your password entries did not match"
-   	 			, csrfToken: req.csrfToken()
-   	 		});
-   	 	} else if (!regEx.test(req.body.email)) {
-   	 		return res.render("register", {
-   	 			message: "Error: The email address you submitted is invalid"
-   	 			, csrfToken: req.csrfToken()
-   	 		});
-   	 	}
-    	
-    	User.register(
-      		new User({ username: req.body.username, email: req.body.email }),
-      		req.body.password,
-      		function(err) {
-        		if (err) {
-          		return res.render("register", {
-            		message: err
-            		, csrfToken: req.csrfToken()
-          		});
-        		}
-        		passport.authenticate('local')(req, res, function() {
-        		res.redirect('/');
-       	 	});
-      		}
-   	 	);	
+    var regEx = // valid email format
+      /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    if (req.body.password !== req.body.confirmPassword) {
+    return res.render("register", {
+        message: "Error: Your password entries did not match"
+        , csrfToken: req.csrfToken()
+      });
+    } else if (!regEx.test(req.body.email)) {
+      return res.render("register", {
+        message: "Error: The email address you submitted is invalid"
+        , csrfToken: req.csrfToken()
+      });
+    }
+    User.register( // valid register data
+        new User({ username: req.body.username, email: req.body.email }),
+        req.body.password,
+        function(err) {
+          if (err) {
+            return res.render("register", {
+              message: err
+              , csrfToken: req.csrfToken()
+            });
+          }
+          passport.authenticate('local')(req, res, function() {
+          res.redirect('/');
+        });
+        }
+    );
   });
 
 router.get('/logout', function(req, res) {
