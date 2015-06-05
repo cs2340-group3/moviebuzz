@@ -13,6 +13,13 @@ var UserSchema = new Schema({
   password: {
     type: String
   },
+  email: {
+    type: String
+    , required: true
+    , lowercase: true
+    , trim: true
+    , index: { unique: true }
+  },
   date_created: { // when the user created his account
     type: Date
     , required: true
