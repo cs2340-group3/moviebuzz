@@ -18,7 +18,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static('public/'));
 
-
 // Set up favicon of gatech.edu
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
