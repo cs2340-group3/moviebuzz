@@ -5,7 +5,7 @@
     "ROTTEN_API_KEY":{
       "required":true
     },
-    "MONGOLAB_URL":{
+    "MONGOLAB_URI":{
       "required":true
     }
   },
