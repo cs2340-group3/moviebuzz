@@ -3,34 +3,31 @@
 
 <ul>
   {{#if user}}
-  <h5>
-    <li><a href="/profile">Profile</a></li>
-    </h5>
-  {{else}}
-  <h3>
-  <form action = "login">
-  <input type="submit" class="btn btn-default btn-lg" value = "LOGIN"></input>
-  </form>
-</h3>
-<h4>
-  <form action = "register">
-  <input type="submit" class="btn btn-default btn-lg" value = "REGISTER"></input>
-  </form>
-</h4>
+    <p style="text-align: center"><a href="/profile">Profile</a></p>
 
-<h5>
-  <img src="http://www.news.gatech.edu/sites/default/files/uploads/mercury_images/ta_dah_buzz_2_buld_copy_copy_0.jpg" alt="Klematis" width="300" height="300">
-</h5>
-    
+  {{else}}
+    <form action="login" class="center">
+      <div style="text-align:center;">
+        <input type="submit" class="btn btn-default btn-lg" value="LOGIN"/>
+      </div>
+    </form>
+    <form action="register" class="center">
+      <div style="text-align:center;">
+        <input type="submit" class="btn btn-default btn-lg" value="REGISTER"/>
+      </div>
+    </form>
+    <img class="center" style="display: block" width="300" height="300"
+         src="http://www.news.gatech.edu/sites/default/files/uploads/mercury_images/ta_dah_buzz_2_buld_copy_copy_0.jpg"
+        >
   {{/if}}
 </ul>
 
 {{#if user}}
-<h5>
-  <form name="logout_form" method="get" action="/logout">
-    <input name="submit_logout" type="submit" value="Logout">
+  <form name="logout_form" method="get" class="center" action="/logout">
+    <div style="text-align:center;">
+      <input name="submit_logout" type="submit" value="Logout" class="center">
+    </div>
   </form>
-  </h5>
 {{/if}}
 
 

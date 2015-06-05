@@ -6,60 +6,40 @@ html {
 
 h1 {
     text-shadow: 0 0 10px #fff,
-                0 0 20px #fff,
-                0 0 30px #fff,
-                0 0 40px #FFD700,
-                0 0 70px #FFD700,
-                0 0 80px #FFD700,
-                0 0 100px #FFD700,
-                0 0 150px #FFD700;
+    0 0 20px #fff,
+    0 0 30px #fff,
+    0 0 40px #FFD700,
+    0 0 70px #FFD700,
+    0 0 80px #FFD700,
+    0 0 100px #FFD700,
+    0 0 150px #FFD700;
     text-align: center;
-    
     top: 200px;
     font-size: 100px;
 }
+
 .btn-lg {
-  font-family: Courier New;
-  color: #000000;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-  height: 80px;
-  width: 150px;
-  position: relative;
+    color: #000000;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    height: 80px;
+    width: 150px;
+    position: relative;
 }
 
 .btn-lg:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .center {
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
-    background-color: #b0e0e6;
+    margin: 0 auto;
 }
 
-div {
-    width: 80%;
-    height: 600px;
-    margin: 4em auto;
-    background-color: rgba(225,225,225,.8);
-}
-h3 {
-    position: absolute;
-    left: 770px;
-    top: 550px;
-}
 h4 {
-  position: absolute;
-    left: 970px;
-    top: 550px;
-
+    text-align: center;
 }
-h5{
-    margin-left: auto;
-    margin-right: auto;
-    width: 6em
- 
+
+h5 {
+    text-align: center;
 }
