@@ -83,7 +83,9 @@ router.get('/logout', function(req, res) {
   req.logout();
   res.redirect("/");
 });
-
+router.get('/editProfile', function(req, res){
+  res.render('editProfile', {username: req.user.username});
+});
 router.get('/profile', function(req, res) {
   if(req.session.passport.user === undefined) {
     res.redirect('/login');
