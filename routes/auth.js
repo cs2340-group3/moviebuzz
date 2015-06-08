@@ -63,11 +63,11 @@ router.route('/register')
       });
     }
     User.register( // valid register data
-        new User({ username: req.body.username, email: req.body.email }), //pass info to schema
+        new User({ username: req.body.username, email: req.body.email, firstname: req.body.firstname, lastname: req.body.lastname }), //pass info to schema
         req.body.password,
         function(err) {
           if (err) {
-            return res.render("register", {
+          	return res.render("register", {
               message: err
               , csrfToken: req.csrfToken()
             });
