@@ -1,17 +1,43 @@
-<h1>User registration</h1>
+<div class="container">
+  <div class="jumbotron">
+    <h2>Register</h2>
+    {{#if message}}
+      <div class="alert alert-warning" role="alert">{{message}}</div>
+    {{/if}}
+    <form action="/register" method="post" data-toggle="validator" role="form">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-<h4> {{message}} </h4>
-<br/>
+      <div class="form-group">
+        <label for="inputName" class="control-label">Username</label>
+        <input type="text" name="username" class="form-control" id="inputName" placeholder="George Burdell" required>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="control-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email"
+               data-error="Bruh, that email address is invalid" name="email" required>
 
-<form action="/register" method="POST">
-  <div style="text-align: center">
-  <input type="hidden" name="_csrf" value="{{csrfToken}}">
-  First Name: <input type="text" name="firstname"><br/>
-  Last Name: <input type="text" name="lastname"><br/>
-  Username: <input type="text" name="username"><br/>
-  Password: <input type="password" name="password"><br/>
-  Confirm Password: <input type="password" name="confirmPassword"><br/>
-  Email: <input type="text" name="email"><br/>
-  <button type="submit">Submit</button>
-    </div>
-</form>
+        <div class="help-block with-errors"></div>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword" class="control-label"
+               style="display: block">Password<span>&nbsp;(Minimum 6 characters)</span></label>
+        <div class="form-group col-sm-6" style="padding-left: 0em">
+          <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password"
+                 name="password" required>
+          <span class="help-block"></span>
+        </div>
+        <div class="form-group col-sm-6" style="padding-right: 0em">
+          <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword"
+                 name="confirmPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
+
+          <div class="help-block"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/vendor/bootstrap-validator/dist/validator.min.js"></script>
