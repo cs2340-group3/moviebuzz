@@ -12,14 +12,12 @@ var UserSchema = new Schema({
   },
   firstname: { //legal first name of user
     type: String
-    , required: true
-    , lowercase: true
+    , lowercase: false
     , trim: true
   },
   lastname: { //legal last name of user
     type: String
-    , required: true
-    , lowercase: true
+    , lowercase: false
     , trim: true
   },
   password: {
