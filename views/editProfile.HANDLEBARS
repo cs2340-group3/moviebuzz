@@ -1,6 +1,7 @@
 <h1>Edit Profile</h1>
 <h5>
-	<form>
+	<form name = "submit" method = "get" action = "/profile">
+		
 	First Name:<br>
 	<input type = "text" value = "{{firstname}}" name = "firstname">
 	<br>
@@ -15,5 +16,6 @@
 	<br>
 	Confirm Password:<br>
 	<input type = "password" name = "confimPassword">
+		<input name = "Submit" type = "submit" value = "Submit">
 	</form>
 </h5>
