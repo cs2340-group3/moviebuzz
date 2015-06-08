@@ -63,7 +63,7 @@ router.route('/register')
       });
     }
     User.register( // valid register data
-        new User({ username: req.body.username, email: req.body.email }),
+        new User({ username: req.body.username, email: req.body.email, firstname: req.body.firstname, lastname: req.body.lastname}),
         req.body.password,
         function(err) {
           if (err) {

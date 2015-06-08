@@ -10,6 +10,18 @@ var UserSchema = new Schema({
     , trim: true // ' abc ' will be trimmed to 'abc'
     , index: { unique: true }
   },
+  firstname: {
+    type: String
+    , required: true
+    , lowercase: true
+    , trim: true
+  },
+  lastname: {
+    type: String
+    , required: true
+    , lowercase: true
+    , trim: true
+  },
   password: {
     type: String
   },

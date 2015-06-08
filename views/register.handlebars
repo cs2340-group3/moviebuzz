@@ -2,11 +2,16 @@
 
 <h4> {{message}} </h4>
 <br/>
+
 <form action="/register" method="POST">
+  <div style="text-align: center">
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
+  First Name: <input type="text" name="firstname"><br/>
+  Last Name: <input type="text" name="lastname"><br/>
   Username: <input type="text" name="username"><br/>
   Password: <input type="password" name="password"><br/>
   Confirm Password: <input type="password" name="confirmPassword"><br/>
   Email: <input type="text" name="email"><br/>
   <button type="submit">Submit</button>
+    </div>
 </form>
