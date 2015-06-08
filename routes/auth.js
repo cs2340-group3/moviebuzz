@@ -51,19 +51,19 @@ router.route('/register')
   .post(function(req, res, next) {
     var regEx = // valid email format
       /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    if (req.body.password !== req.body.confirmPassword) {
-    return res.render("register", {
-        message: "Error: Your password entries did not match"
+    if (req.body.password !== req.body.confirmPassword) { //make sure password matches
+    return res.render("register", { //if they didn't match reload the page
+        message: "Error: Your password entries did not match" //and explain error
         , csrfToken: req.csrfToken()
       });
-    } else if (!regEx.test(req.body.email)) {
-      return res.render("register", {
-        message: "Error: The email address you submitted is invalid"
+    } else if (!regEx.test(req.body.email)) { //make sure email is valid 
+      return res.render("register", { //if invalid email reload the page
+        message: "Error: The email address you submitted is invalid" //and explain error
         , csrfToken: req.csrfToken()
       });
     }
     User.register( // valid register data
-        new User({ username: req.body.username, email: req.body.email }),
+        new User({ username: req.body.username, email: req.body.email }), //pass info to schema
         req.body.password,
         function(err) {
           if (err) {
@@ -81,14 +81,14 @@ router.route('/register')
 
 router.get('/logout', function(req, res) {
   req.logout();
-  res.redirect("/");
+  res.redirect("/"); //redirect to root if user logs out
 });
 
 router.get('/profile', function(req, res) {
-  if(req.session.passport.user === undefined) {
+  if(req.session.passport.user === undefined) { //if they aren't logged in make them log in
     res.redirect('/login');
   } else {
-    res.render('profile', { username: req.user.username });
+    res.render('profile', { username: req.user.username }); //otherwise take them to their profile
   }
 });
 
