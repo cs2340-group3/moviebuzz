@@ -1,0 +1,21 @@
+{
+  "name": "moviebuzz",
+  "version": "1.0.0",
+  "homepage": "https://github.com/cs2340-group3/moviebuzz",
+  "authors": [
+    "z3t1 <zhfyyq@gmail.com>"
+  ],
+  "description": "CS 2340 Project for Summer 2015",
+  "keywords": [
+    "Moviebuzz"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ]
+}
