@@ -93,7 +93,10 @@ router.get('/profile', function(req, res) {
   if(req.session.passport.user === undefined) {
     res.redirect('/login');
   } else {
-    res.render('profile', { username: req.user.username });
+    res.render('profile', { username: req.user.username,
+    email: req.user.email
+      
+    });
   }
 });
 
