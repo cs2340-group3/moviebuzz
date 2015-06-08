@@ -84,7 +84,10 @@ router.get('/logout', function(req, res) {
   res.redirect("/");
 });
 router.get('/editProfile', function(req, res){
-  res.render('editProfile', {username: req.user.username});
+  res.render('editProfile', {username: req.user.username,
+    email: req.user.email
+    
+  });
 });
 router.get('/profile', function(req, res) {
   if(req.session.passport.user === undefined) {
