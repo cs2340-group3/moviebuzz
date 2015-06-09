@@ -12,13 +12,11 @@ var UserSchema = new Schema({
   },
   firstname: {
     type: String
-    , required: true
     , lowercase: true
     , trim: true
   },
   lastname: {
     type: String
-    , required: true
     , lowercase: true
     , trim: true
   },

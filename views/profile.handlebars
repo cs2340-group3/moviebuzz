@@ -3,6 +3,13 @@
 <p>Your username is {{username}} </p>
 <br/>
 
+<div style="text-align: center">
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+  First Name: <input type="text" name="firstname"><br/>
+  Last Name: <input type="text" name="lastname"><br/>
+  <button type="submit">Submit</button>
+</div>
+
 <form name="logout_form" method="get" action="/logout">
   <input name="submit_logout" type="submit" value="Logout">
 </form>
