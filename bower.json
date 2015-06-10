@@ -1,0 +1,29 @@
+{
+  "name": "moviebuzz",
+  "version": "1.0.0",
+  "homepage": "https://github.com/cs2340-group3/moviebuzz",
+  "authors": [
+    "Fred Zhang <h.z@gatech.edu>",
+    "Kimberly Caras <kcaras6@gatech.edu>",
+    "Tim Vergenz <vergenzt@gatech.edu>",
+    "Tian-Yo Yang <tyang82@gatech.edu>",
+    "Elyes Graba <elyesgraba@gatech.edu>"
+  ],
+  "description": "CS 2340 Project for Summer 2015",
+  "keywords": [
+    "Moviebuzz"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "bootstrap-validator": "~0.8.1"
+  }
+}
