@@ -85,7 +85,8 @@ router.get('/logout', function(req, res) {
 });
 router.get('/editProfile', function(req, res){
   res.render('editProfile', {username: req.user.username,
-    email: req.user.email
+    email: req.user.email,
+    password: req.user.password
     
   });
 });
