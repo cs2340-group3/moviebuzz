@@ -104,6 +104,9 @@ router.get('/profile', function(req, res) {
 
   }
 });
+$('/profile').ready(function() {
+    $('#username').editable();
+});
 
 module.exports = router;
 
