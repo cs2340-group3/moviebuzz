@@ -90,6 +90,11 @@ router.get('/editProfile', function(req, res){
     
   });
 });
+
+('/profile').ready(function() {
+    $('/profile').editable();
+});
+
 router.get('/profile', function(req, res) {
   if(req.session.passport.user === undefined) { //if they aren't logged in make them log in
     res.redirect('/login');
