@@ -54,10 +54,17 @@ var UserSchema = new Schema({
     , required: true
     , default: false
   },
+ 
   bio: { // This is a free text for a user to talk about their interests
     type: String
     , trim: true
   }
+});
+$('#username').editable({
+    type: 'text',
+    pk: 1,
+    url: '/post',
+    title: 'Enter username'
 });
 
 UserSchema.plugin(passportLocalMongoose, {usernameLowerCase: true});
