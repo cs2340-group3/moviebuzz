@@ -91,7 +91,7 @@ router.get('/editProfile', function(req, res){
   });
 });
 
-('/profile').ready(function() {
+('/profile').get(function() {
     $('/profile').editable();
 });
 
