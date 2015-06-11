@@ -24,7 +24,6 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.4",
-    "bootstrap-validator": "~0.8.1",
-    "x-editable": "~1.5.1"
+    "bootstrap-validator": "~0.8.1"
   }
 }
