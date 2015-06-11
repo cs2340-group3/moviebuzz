@@ -90,7 +90,7 @@ router.get('/editProfile', function(req, res){
     
   });
 });
-(document).ready(function() {
+(profile).ready(function() {
     ('{{username}}').editable();
 });
 
