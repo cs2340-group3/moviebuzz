@@ -29,7 +29,8 @@ router.route('/profile')
       });
     }
     var updatedData = {};
-    // TODO: This is certainly not secure
+    // TODO: This is certainly not secure:
+    // Type checking and sanitaton
     updatedData[req.body.name] = req.body.value;
     User.update({ username: req.user.username }, updatedData, function(err) {
       if (err) {
@@ -38,8 +39,8 @@ router.route('/profile')
           , msg: 'Database error?'
         });
       }
-      return res.status(200);
     });
+    return res.sendStatus(200);
   });
 
 module.exports = router;

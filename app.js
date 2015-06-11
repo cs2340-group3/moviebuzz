@@ -37,7 +37,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Use CSRF Protection
-// TODO: Add put here is just for debug
+// TODO: Add PUT here is just for debug
+// TODO: Add csrf token to the profile.handlebars
 app.use(csrf({ignoreMethods: ['PUT', 'GET', 'HEAD', 'OPTIONS']}));
 
 // Enable handlebars template engine
