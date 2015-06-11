@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Website project for CS 2340, Summer 2015.",
   "main": "app.js",
+  "scripts": {
+    "postinstall": "bower install"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cs2340-group3/moviebuzz.git"
