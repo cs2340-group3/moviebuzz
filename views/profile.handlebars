@@ -1,7 +1,13 @@
 <div class="container">
   <div class="jumbotron">
+    {{#if message}}
+      <div class="alert alert-warning" role="alert">{{message}}</div>
+    {{/if}}
     <h2>User profile</h2>
     <p>Your username is {{username}} </p>
+    <p>First Name: {{firstname}}</p>
+    <p>Last Name: {{lastname}}</p>
+    <p>Email: {{email}}</p>
     <a class="btn btn-default" href="/logout">Log out</a>
   </div>
 </div>
