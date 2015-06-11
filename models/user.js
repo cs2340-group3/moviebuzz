@@ -59,12 +59,13 @@ var UserSchema = new Schema({
     type: String
     , trim: true
   }
+});
 $('#username').editable({
     type: 'text',
     pk: 1,
     url: '/post',
     title: 'Enter username'
-})
+
 });
 
 UserSchema.plugin(passportLocalMongoose, {usernameLowerCase: true});
