@@ -54,11 +54,13 @@ var UserSchema = new Schema({
     , required: true
     , default: false
   },
+ 
   bio: { // This is a free text for a user to talk about their interests
     type: String
     , trim: true
   }
 });
+
 
 UserSchema.plugin(passportLocalMongoose, {usernameLowerCase: true});
 

@@ -83,14 +83,28 @@ router.get('/logout', function(req, res) {
   req.logout();
   res.redirect("/"); //redirect to root if user logs out
 });
+router.get('/editProfile', function(req, res){
+  res.render('editProfile', {username: req.user.username,
+    email: req.user.email,
+    password: req.user.password
+    
+  });
+});
+
 
 router.get('/profile', function(req, res) {
   if(req.session.passport.user === undefined) { //if they aren't logged in make them log in
     res.redirect('/login');
   } else {
-    res.render('profile', { username: req.user.username }); //otherwise take them to their profile
+
+    res.render('profile', { username: req.user.username,
+    email: req.user.email
+      
+    });
+
   }
 });
+
 
 module.exports = router;
 

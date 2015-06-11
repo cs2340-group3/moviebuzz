@@ -1,7 +1,25 @@
+
+<link href="vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+<script src="vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
+
+<script src="profile.js"></script>
+
 <div class="container">
   <div class="jumbotron">
     <h2>User profile</h2>
-    <p>Your username is {{username}} </p>
+    <p>Your username is </p>
+    
+    <a href="#" id="username" data-type="text" data-placement="right" data-title="Enter username">superuser</a>
+    
+    
+    <div>
+        <span>Username:</span>
+        <a href="#" id="username" data-type="text" data-placement="right" data-title="Enter username">superuser</a>
+      </div>
+    
     <a class="btn btn-default" href="/logout">Log out</a>
   </div>
 </div>
+
+
