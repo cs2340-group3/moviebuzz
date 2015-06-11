@@ -49,14 +49,15 @@ router.route('/register')
     res.render('register', { csrfToken: req.csrfToken() });
   })
   .post(function(req, res, next) {
-    var email = // valid email format
-      /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    // TODO: Check passoword length > 6
     if (req.body.password !== req.body.confirmPassword) { // make sure password matches
       return res.render("register", { // if they didn't match reload the page
         message: "Error: Your password entries did not match" // and explain error
         , csrfToken: req.csrfToken()
       });
     }
+    var email = // valid email format
+      /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     if (!email.test(req.body.email)) { // make sure email is valid
       return res.render("register", { // if invalid email reload the page
         message: "Error: The email address you submitted is invalid" // and explain error
