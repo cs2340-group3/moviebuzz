@@ -90,8 +90,8 @@ router.get('/editProfile', function(req, res){
     
   });
 });
-$(document).ready(function() {
-    $('{{username}}').editable();
+(document).ready(function() {
+    ('{{username}}').editable();
 });
 
 router.get('/profile', function(req, res) {
