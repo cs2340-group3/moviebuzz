@@ -7,4 +7,6 @@ $(document).ready(function() {
   $.fn.editable.defaults.send = 'always'; // we don't have pk field
   $('#firstname').editable();
   $('#lastname').editable();
+  $('#major').editable();
+  $('#bio').editable();
 });
