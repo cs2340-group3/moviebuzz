@@ -4,7 +4,7 @@
   "description": "Website project for CS 2340, Summer 2015.",
   "main": "app.js",
   "scripts": {
-    "postinstall": "bower install"
+    "postinstall": "./node_modules/.bin/bower install"
   },
   "repository": {
     "type": "git",
