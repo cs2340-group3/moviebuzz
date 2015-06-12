@@ -19,6 +19,8 @@ router.route('/profile')
       , email: req.user.email
       , firstname: req.user.firstname
       , lastname: req.user.lastname
+      , major: req.user.major
+      , bio: req.user.bio
     });
   })
   .put(function (req, res) {
