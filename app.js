@@ -4,7 +4,6 @@ var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
 var expressSession = require('express-session');
 var csrf = require('csurf');
 var favicon = require('serve-favicon');
@@ -12,7 +11,6 @@ var handlebars  = require('express-handlebars');
 
 // Set up express middlewares
 app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for csurf)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
