@@ -67,6 +67,12 @@ router.route('/register')
         req.body.password,
         function(err) {
           if (err) {
+            if (err.code == 11000) {
+              return res.render("register", {
+                message: "I'm sorry, but somebody else has already registered with that email."
+                , csrfToken: req.csrfToken()
+              });
+            }
             return res.render("register", {
               message: err
               , csrfToken: req.csrfToken()
