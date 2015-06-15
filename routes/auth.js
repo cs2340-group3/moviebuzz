@@ -42,6 +42,10 @@ router.route('/login')
       })(req, res, next);
     }
 );
+router.route('welcome')
+  .get(function(req, res){
+    res.render('welcome');
+  });
 
 router.route('/register')
   .get(function(req, res) {
