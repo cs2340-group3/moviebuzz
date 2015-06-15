@@ -42,9 +42,9 @@ router.route('/login')
       })(req, res, next);
     }
 );
-router.route('welcome')
+router.route('/welcome')
   .get(function(req, res){
-    res.render('welcome');
+    res.render('welcome', { csrfToken: req.csrfToken() });
   });
 
 router.route('/register')
