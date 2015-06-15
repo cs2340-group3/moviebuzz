@@ -84,8 +84,11 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var port = process.env.PORT || 3000; // port 3000 as default
-app.listen(port, function() {
-  console.log('Listening on port ' + port);
-});
+module.exports = app;
+if (!module.parent) {
+  var port = process.env.PORT || 3000; // port 3000 as default
+  app.listen(port, function() {
+    console.log('Listening on port ' + port);
+  });
+}
 
