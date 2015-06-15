@@ -9,8 +9,12 @@ var csrf = require('csurf');
 var favicon = require('serve-favicon');
 var handlebars  = require('express-handlebars');
 
-// Set up express middlewares
-app.use(morgan('dev')); // log every request to the console
+// Set up logging
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan('dev'));
+}
+
+// Set up body parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -80,8 +84,11 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var port = process.env.PORT || 3000; // port 3000 as default
-app.listen(port, function() {
-  console.log('Listening on port ' + port);
-});
+module.exports = app;
+if (!module.parent) {
+  var port = process.env.PORT || 3000; // port 3000 as default
+  app.listen(port, function() {
+    console.log('Listening on port ' + port);
+  });
+}
 

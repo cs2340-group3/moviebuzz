@@ -2,18 +2,14 @@
   <div class="jumbotron">
     <h2 class="text-center">Welcome to Movie Buzz</h2>
 
-    {{#if user}}
-      <p class="text-center"><a class="btn btn-default" href="/profile" role="button">Profile</a></p>
-
-      <form class="form-inline text-center" name="logout_form" method="get" action="/logout">
-        <button type="submit" class="btn btn-default">Log out</button>
-      </form>
-
-    {{else}}
-      <p class="text-center">
-        <a class="btn btn-default" href="/login" role="button">Login</a>
-        <a class="btn btn-primary" href="/register" role="button">Register</a>
-      </p>
-    {{/if}}
+    <p class="text-center">
+      {{#if user}}
+        <a class="btn btn-primary" href="/profile" role="button">Profile</a>
+        <a class="btn btn-default" href="/logout" role="button">Log out</a>
+      {{else}}
+        <a class="btn btn-primary" href="/login" role="button">Login</a>
+        <a class="btn btn-default" href="/register" role="button">Register</a>
+      {{/if}}
+    </p>
   </div>
 </div>
