@@ -4,6 +4,7 @@
   "description": "Website project for CS 2340, Summer 2015.",
   "main": "app.js",
   "scripts": {
+    "test": "./node_modules/.bin/mocha tests/**/*.js",
     "postinstall": "./node_modules/.bin/bower install"
   },
   "repository": {
@@ -38,5 +39,9 @@
     "passport-local-mongoose": "^1.0.0",
     "rotten-api": "0.0.2",
     "serve-favicon": "^2.2.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "zombie": "3.1.x"
   }
 }
