@@ -40,7 +40,13 @@ router.route('/register')
     res.render('register', { csrfToken: req.csrfToken() });
   })
   .post(function(req, res, next) {
-    // TODO: Check passoword length > 6
+    if (req.body.password.length <= 6) {
+      return res.render("register", {
+        message: "Error: your password length is too short"
+        , csrfToken: req.csrfToken()
+      })
+    }
+
     if (req.body.password !== req.body.confirmPassword) { // make sure password matches
       return res.render("register", { // if they didn't match reload the page
         message: "Error: Your password entries did not match" // and explain error

@@ -32,8 +32,14 @@ router.route('/profile')
       });
     }
     var updatedData = {};
-    // TODO: This is certainly not secure:
-    // Type checking and sanitaton
+    var validFields = ["bio", "firstname", "lastname", "major"];
+    if (validFields.indexOf(req.body.name) == -1) {
+        return res.status(400).json({
+          status: 'error'
+          , msg: 'Invalid input'
+        });
+    }
+    // TODO: First name, Last name, and major should contain only letters
     updatedData[req.body.name] = req.body.value;
     User.update({ username: req.user.username }, updatedData, function(err) {
       if (err) {
