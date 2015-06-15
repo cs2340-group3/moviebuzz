@@ -35,7 +35,7 @@
     "morgan": "^1.5.3",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^1.0.0",
+    "passport-local-mongoose": "saintedlama/passport-local-mongoose#fc2429938cc7b76a917e38b359485fbc39544bbb",
     "rotten-api": "0.0.2",
     "serve-favicon": "^2.2.1"
   }
