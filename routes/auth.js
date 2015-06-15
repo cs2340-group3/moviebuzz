@@ -71,13 +71,13 @@ router.route('/register')
       }), //pass info to schema
       req.body.password,
       function(err) {
-        if (err) {
-          if (err.code === 11000) {
-            res.render("register", {
-              message: "I'm sorry, but someone else has already registered with that email address."
-              ,csrfToken: req.csrfToken()
-            });
-          }
+        if (err && err.code === 11000) { // Duplicate key error of Mongoose
+          return res.render("register", {
+            message: "I'm sorry, but someone else has already registered with that email address."
+            , csrfToken: req.csrfToken()
+          });
+        }
+        if (err && err.code !== 11000) { // Other error
           return res.render("register", {
             message: err
             , csrfToken: req.csrfToken()
