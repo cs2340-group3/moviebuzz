@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Website project for CS 2340, Summer 2015.",
   "main": "app.js",
+  "scripts": {
+    "postinstall": "./node_modules/.bin/bower install"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cs2340-group3/moviebuzz.git"
@@ -22,7 +25,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.12.4",
-    "cookie-parser": "^1.3.5",
+    "bower": "^1.4.1",
     "csurf": "^1.8.2",
     "express": "4.12.4",
     "express-handlebars": "^2.0.1",
@@ -35,8 +38,5 @@
     "passport-local-mongoose": "^1.0.0",
     "rotten-api": "0.0.2",
     "serve-favicon": "^2.2.1"
-  },
-  "devDependencies": {
-    "bower": "^1.4.1"
   }
 }

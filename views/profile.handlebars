@@ -1,22 +1,40 @@
-<link href="public/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
-<script src="public/vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
-
-
-<script src="profile.js"></script>
+<link href="vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+<script src="vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="js/profile.js"></script>
 
 <div class="container">
   <div class="jumbotron">
+    {{#if message}}
+      <div class="alert alert-warning" role="alert">{{message}}</div>
+    {{/if}}
     <h2>User profile</h2>
-    <p>Your username is </p>
-    
-    <a href="#" id="username" data-type="text" data-placement="right" data-title="Enter username">superuser</a>
-    
-    
+    <p>Username (id): {{username}}</p>
+    <p>Email: {{email}}</p>
+
     <div>
-        <span>Username:</span>
-        <a href="#" id="username" data-type="text" data-placement="right" data-title="Enter username">superuser</a>
-      </div>
-    
+      <p style="display: inline">Your first name: </p>
+      <a href="" id="firstname" data-type="text"
+         data-url="/profile" data-title="Enter a new first name">{{firstname}}</a>
+    </div>
+
+    <div>
+      <p style="display: inline">Your last name: </p>
+      <a href="" id="lastname" data-type="text"
+         data-url="/profile" data-title="Enter a new last name">{{lastname}}</a>
+    </div>
+
+    <div>
+      <p style="display: inline">Your major: </p>
+      <a href="" id="major" data-type="text"
+         data-url="/profile" data-title="Enter a new major">{{major}}</a>
+    </div>
+
+    <div>
+      <p style="display: inline">Your personal bio: </p>
+      <a href="" id="bio" data-type="textarea"
+         data-url="/profile" data-title="Enter a new bio">{{bio}}</a>
+    </div>
+    <a class="btn btn-default" href="/">Main Page</a>
     <a class="btn btn-default" href="/logout">Log out</a>
   </div>
 </div>
