@@ -2,6 +2,7 @@ var express = require('express');
 var User = require('../models/user');
 var passport = require('passport');
 var router = express.Router();
+var email_valid = require('email-validator');
 
 router.route('/login')
   .get(function(req, res) {
@@ -12,17 +13,7 @@ router.route('/login')
     }
   })
   .post(function(req, res, next) {
-    // TODO: Implement 3-time failure restriction
-    // and check if it's a locked or banned account
-    // We should probably do it here, before going
-    // to the authentication. Otherwise, we can look
-    // into the library source code and customize it.
-    // Also, a new field, number of failures, may be
-    // added to the User model.
-    //
-    // Note: use req.body.username to get username
-    // and User.findOne() to query database
-    passport.authenticate('local',
+      passport.authenticate('local',
       function(err, user, info) {
         if (err) {
           return next(err); // will generate a 500 error
@@ -56,9 +47,7 @@ router.route('/register')
         , csrfToken: req.csrfToken()
       });
     }
-    var email = // valid email format
-      /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    if (!email.test(req.body.email)) { // make sure email is valid
+    if (!email_valid.validate(req.body.email)) { // make sure email is valid
       return res.render("register", { // if invalid email reload the page
         message: "Error: The email address you submitted is invalid" // and explain error
         , csrfToken: req.csrfToken()
@@ -90,3 +79,4 @@ router.get('/logout', function(req, res) {
 });
 
 module.exports = router;
+

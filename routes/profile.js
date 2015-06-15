@@ -21,6 +21,7 @@ router.route('/profile')
       , lastname: req.user.lastname
       , major: req.user.major
       , bio: req.user.bio
+      , csrfToken: req.csrfToken()
     });
   })
   .put(function (req, res) {
@@ -46,3 +47,4 @@ router.route('/profile')
   });
 
 module.exports = router;
+
