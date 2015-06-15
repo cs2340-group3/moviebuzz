@@ -8,9 +8,10 @@
       <div class="alert alert-warning" role="alert">{{message}}</div>
     {{/if}}
     <h2>User profile</h2>
-    <p>Username (id): {{username}}</p>
+    <p>Username: {{username}}</p>
     <p>Email: {{email}}</p>
 
+    <div id="_token" class="hidden" data-token="{{csrfToken}}"></div>
     <div>
       <p style="display: inline">Your first name: </p>
       <a href="" id="firstname" data-type="text"
@@ -38,5 +39,4 @@
     <a class="btn btn-default" href="/logout">Log out</a>
   </div>
 </div>
-
 
