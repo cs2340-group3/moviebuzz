@@ -56,7 +56,7 @@ router.route('/register')
         , csrfToken: req.csrfToken()
       })
     }
-    // TODO: Check passoword length > 6
+    
     if (req.body.password !== req.body.confirmPassword) { // make sure password matches
       return res.render("register", { // if they didn't match reload the page
         message: "Error: Your password entries did not match" // and explain error
