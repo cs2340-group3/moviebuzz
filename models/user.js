@@ -49,18 +49,17 @@ var UserSchema = new Schema({
     , required: true
     , default: false
   },
-  locked: { // locked because they incorrectly loogged in 3 times
-    type: Boolean
-    , required: true
-    , default: false
-  },
   bio: { // This is a free text for a user to talk about their interests
     type: String
     , trim: true
   }
 });
 
-UserSchema.plugin(passportLocalMongoose, {usernameLowerCase: true});
+UserSchema.plugin(passportLocalMongoose, {
+  usernameLowerCase: true
+  , limitAttempts: true
+  , maxAttempts: 3
+});
 
 module.exports = mongoose.model('User', UserSchema);
 
