@@ -1,4 +1,7 @@
 # MovieBuzz
+
+[![license:mit](https://img.shields.io/badge/license-mit-green.svg?style=flat-square)](#license)
+[![dependencies:?](https://david-dm.org/cs2340-group3/moviebuzz.svg)](https://david-dm.org/)
 [![Build Status](https://travis-ci.org/cs2340-group3/moviebuzz.svg?branch=master)](https://travis-ci.org/cs2340-group3/moviebuzz)
 
 This is our group's final project for CS 2340 (Objects & Design) at Georgia Tech.
