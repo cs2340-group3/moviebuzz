@@ -1,5 +1,4 @@
-$(document).ready(function() {
-  // TODO: Error handling. See backend code.
+$(function() {
   $.fn.editable.defaults.ajaxOptions = {
     type: "PUT"
   };
@@ -10,7 +9,7 @@ $(document).ready(function() {
     return params;
   };
   $.fn.editable.defaults.error = function (xhr, status, error) {
-    var err = eval("(" + xhr.responseText + ")");
+    var err = JSON.parse(xhr.responseText);
     return err.msg;
   }
   $('#firstname').editable();
@@ -18,3 +17,4 @@ $(document).ready(function() {
   $('#major').editable();
   $('#bio').editable();
 });
+

@@ -4,57 +4,61 @@ var passport = require('passport');
 var router = express.Router();
 var email_valid = require('email-validator');
 
-router.route('/login')
-  .get(function(req, res) {
-    if(req.user === undefined) {
-      res.render('login', { csrfToken: req.csrfToken() });
-    } else {
-      res.redirect('/profile');
+function tryLogout(req, res, next) {
+    if (req.user) {
+      req.logout();
     }
-  })
+    next();
+}
+router.route('/login')
+  .all(tryLogout)
   .post(function(req, res, next) {
       passport.authenticate('local',
       function(err, user, info) {
         if (err) {
-          return next(err); // will generate a 500 error
+          return res.status(500).json({
+            message: err
+            , csrfToken: req.csrfToken()
+          })
         }
         if (!user) {
-          return res.render('login', {
+          return res.status(403).json({
             message: info.message
             , csrfToken: req.csrfToken()
           });
         }
         req.login(user, function(err) {
           if(err) {
-            return next(err);
+            return res.status(403).json({
+              message: err
+              , csrfToken: req.csrfToken()
+            });
           }
-          return res.redirect('/')
+          return res.sendStatus(200);
         });
       })(req, res, next);
     }
 );
 
 router.route('/register')
-  .get(function(req, res) {
-    req.logout();
-    res.render('register', { csrfToken: req.csrfToken() });
-  })
+  .all(tryLogout)
   .post(function(req, res, next) {
-    if (req.body.password.length <= 6) { // Check password length
-      return res.render("register", {
+    var alphanumeric = /^[a-zA-Z0-9]+$/;
+    if (!alphanumeric.test(req.body.username)) {
+      return res.status(403).json({
+         message: "Your username must be alphanumeric"
+         , csrfToken: req.csrfToken()
+      });
+    }
+    if (req.body.password.length < 6) { // Check password length
+      return res.status(403).json({
          message: "Error: your password length is too short"
          , csrfToken: req.csrfToken()
       });
     }
-    if (req.body.password !== req.body.confirmPassword) { // make sure password matches
-      return res.render("register", { // if they didn't match reload the page
-        message: "Error: Your password entries did not match" // and explain error
-        , csrfToken: req.csrfToken()
-      });
-    }
     if (!email_valid.validate(req.body.email)) { // make sure email is valid
-      return res.render("register", { // if invalid email reload the page
-        message: "Error: The email address you submitted is invalid" // and explain error
+      return res.status(403).json({ // if invalid email reload the page
+        message: "Error: The email address you submitted is invalid"
         , csrfToken: req.csrfToken()
       });
     }
@@ -62,23 +66,23 @@ router.route('/register')
       new User({
         username: req.body.username
         , email: req.body.email
-      }), //pass info to schema
+      }), // pass info to schema
       req.body.password,
       function(err) {
         if (err && err.code === 11000) { // Duplicate key error of Mongoose
-          return res.render("register", {
+          return res.status(403).json({
             message: "I'm sorry, but someone else has already registered with that email address."
             , csrfToken: req.csrfToken()
           });
         }
         if (err && err.code !== 11000) { // Other error
-          return res.render("register", {
+          return res.status(500).json({
             message: err
             , csrfToken: req.csrfToken()
           });
         }
         passport.authenticate('local')(req, res, function() {
-          res.redirect('/');
+          res.sendStatus(200);
         });
       }
     );
