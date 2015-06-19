@@ -4,6 +4,7 @@
   "description": "Website project for CS 2340, Summer 2015.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "./node_modules/.bin/mocha tests/**/*.js",
     "postinstall": "./node_modules/.bin/bower install"
   },
@@ -46,3 +47,4 @@
     "zombie": "3.1.x"
   }
 }
+
