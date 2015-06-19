@@ -65,6 +65,9 @@ app.use('/', profileRoutes);
 var searchRoutes = require('./routes/search');
 app.use('/', searchRoutes);
 
+var recentRoutes = require('./routes/recent');
+app.use('/', recentRoutes);
+
 // CSURF error handler
 app.use(function (err, req, res, next) {
   if (err.code !== 'EBADCSRFTOKEN') {
