@@ -14,14 +14,14 @@ describe('M4 functionality', function() {
       browser.visit('/register', done);
     });
 
-    it('should display username, email, and password inputs', function() {
+    it.skip('should display username, email, and password inputs', function() {
       browser.assert.element('form input[name=username]');
       browser.assert.element('form input[name=email]');
       browser.assert.element('form input[name=password]');
       browser.assert.element('form input[name=confirmPassword]');
     });
 
-    it('should accept registration of a new user', function() {
+    it.skip('should accept registration of a new user', function() {
       this.timeout(5000);
       return browser
         .fill('username', 'newuser')
@@ -34,7 +34,7 @@ describe('M4 functionality', function() {
         });
     });
 
-    it('should permit cancelling', function() {
+    it.skip('should permit cancelling', function() {
       assert(browser.link('Cancel'));
     });
   });
@@ -48,7 +48,7 @@ describe('M4 functionality', function() {
         });
     });
 
-    it('should show an initial profile', function() {
+    it.skip('should show an initial profile', function() {
       lib.assertTextContains(browser, 'body', ' Username: user ');
       lib.assertTextContains(browser, 'body', ' Email: user@example.com ');
       lib.assertTextContains(browser, 'body', ' Your first name: Empty ');
@@ -65,7 +65,7 @@ describe('M4 functionality', function() {
         });
     }
 
-    it('should permit editing the profile', function() {
+    it.skip('should permit editing the profile', function() {
       return editProfileField('firstname', 'George')
         .then(function() { return editProfileField('lastname', 'Burdell'); })
         .then(function() { return editProfileField('major', 'CS'); })

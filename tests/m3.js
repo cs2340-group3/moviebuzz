@@ -13,18 +13,18 @@ describe('M3 functionality', function() {
       browser.visit('/', done);
     });
 
-    it('should have options for login and registration', function() {
+    it.skip('should have options for login and registration', function() {
       browser.assert.link('a', 'Login', '/login');
       browser.assert.link('a', 'Register', '/register');
     });
 
-    it('login should direct to login page', function() {
+    it.skip('login should direct to login page', function() {
       return browser.clickLink('Login').then(function() {
         browser.assert.url({ pathname: '/login' });
       });
     });
 
-    it('register should direct to registration page', function() {
+    it.skip('register should direct to registration page', function() {
       return browser.clickLink('Register').then(function() {
         browser.assert.url({ pathname: '/register' });
       });
@@ -37,19 +37,19 @@ describe('M3 functionality', function() {
       browser.visit('/login', done);
     });
 
-    it('should display username and password inputs', function() {
+    it.skip('should display username and password inputs', function() {
       browser.assert.element('form input[name=username]');
       browser.assert.element('form input[name=password]');
     });
 
-    it('should direct to profile with correct info', function() {
+    it.skip('should direct to profile with correct info', function() {
       return lib.login(browser)
         .then(function() {
           assert(browser.link('Log out'));
         });
     });
 
-    it('should show error with incorrect info', function() {
+    it.skip('should show error with incorrect info', function() {
       return lib.login(browser, 'user', 'WRONGpass')
         .then(function() {
           browser.assert.url({ pathname: '/login' });
@@ -57,7 +57,7 @@ describe('M3 functionality', function() {
         });
     });
 
-    it('should permit cancelling', function() {
+    it.skip('should permit cancelling', function() {
       assert(browser.link('Cancel'));
     });
   });
@@ -68,7 +68,7 @@ describe('M3 functionality', function() {
       return lib.login(browser);
     });
 
-    it('should work from profile page', function() {
+    it.skip('should work from profile page', function() {
       return browser.visit('/profile')
         .then(function() {
           return browser.clickLink('Log out');
@@ -78,7 +78,7 @@ describe('M3 functionality', function() {
         });
     });
 
-    it('should work from home page', function() {
+    it.skip('should work from home page', function() {
       return browser.visit('/')
         .then(function() {
           return browser.clickLink('Log out');

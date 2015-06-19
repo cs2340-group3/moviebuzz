@@ -1,6 +1,6 @@
 # MovieBuzz
 
-[![license:mit](https://img.shields.io/badge/license-mit-green.svg?style=flat-square)](#license)
+[![license:mit](https://img.shields.io/badge/license-mit-green.svg)](#license)
 [![dependencies:?](https://david-dm.org/cs2340-group3/moviebuzz.svg)](https://david-dm.org/)
 [![Build Status](https://travis-ci.org/cs2340-group3/moviebuzz.svg?branch=master)](https://travis-ci.org/cs2340-group3/moviebuzz)
 
@@ -15,7 +15,7 @@ See the [wiki](https://github.com/cs2340-group3/moviebuzz/wiki) for project requ
 3. Run `npm install & bower install` from the cloned repository.
 4. Run `mongod` from another terminal.
 5. (Optional) Test by `npm test`
-4. Run `node app.js` to start the server.
+4. Run `npm start` to start the server.
 5. Visit `http://localhost:3000` in the browser.
 
 ## Live Demo

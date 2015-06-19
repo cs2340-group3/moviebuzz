@@ -11,7 +11,122 @@
 </head>
 
 <body>
-  {{{body}}}
-</body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Movie Buzz</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        {{#if username}}
+        <li><a href="/profile">{{username}}</a></li>
+          <li><a href="/logout">Logout</a></li>
+        {{else}}
+          <li><a id="loginButton" href="#login" data-toggle="modal" data-target="#loginModal">Login</a></li>
+          <li><a id="registerButton" href="#register" data-toggle="modal" data-target="#registerModal">Register</a></li>
+        {{/if}}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="loginModalLabel">Login</h4>
+      </div>
+      <div class="modal-body">
+        <!--TODO: Change back end. This message does not work yet. -->
+        <div id="loginAlert" class="alert alert-warning hidden" role="alert"></div>
+        <form action="/login" method="post" id="loginForm" role="form">
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+          <div class="form-group">
+            <label for="inputName" class="control-label">Username</label>
+            <input type="text" name="username" class="form-control" id="inputName" placeholder="" required>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="control-label">Password</label>
+            <input type="password" name="password" class="form-control" id="inputPassword" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <span>Do not have an account yet? &rarr;</span>
+        <button id="goRegister" type="button" class="btn btn-default" data-dismiss="modal">Register</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="registerModalLabel">Register</h4>
+      </div>
+      <div class="modal-body">
+        <!--TODO: Change back end. This message does not work yet. -->
+        <div id="registerAlert" class="alert alert-warning hidden" role="alert"></div>
+        <form action="/register" id="registerForm" method="post" data-toggle="validator" role="form">
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+          <div class="form-group">
+            <label for="inputName" class="control-label">Username</label>
+            <input type="text" data-error="The username must contain only letters and numbers"
+                 pattern="^[a-zA-Z0-9]+$" name="username" class="form-control" id="inputName" placeholder="GeorgeBurdell" required>
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail" class="control-label">Email</label>
+            <input class="form-control" type="email" id="inputEmail" placeholder="Email"
+                 pattern="^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~'](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~`'])*@[a-zA-Z0-9](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$"
+                 data-error="Bruh, that email address is invalid" name="email" required>
+
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="control-label"
+                style="display: block">Password<span>&nbsp;(At least 6 characters)</span></label>
+            <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password"
+                name="password" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <span>Already have an account? &rarr;</span>
+        <button id="goLogin" type="button" class="btn btn-default" data-dismiss="modal">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+  {{{body}}}
+<script src="/vendor/bootstrap-validator/dist/validator.min.js"></script>
+<script src="/js/navbar.js"></script>
+</body>
 </html>
+

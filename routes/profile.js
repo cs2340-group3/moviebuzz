@@ -9,7 +9,7 @@ function notLogin(req) {
 router.route('/profile')
   .all(function(req, res, next) {
     if (notLogin(req)) {
-      return res.redirect('/login');
+      return res.redirect('/');
     }
     next();
   })
@@ -43,7 +43,7 @@ router.route('/profile')
     updatedData[req.body.name] = req.body.value;
     User.update({ username: req.user.username }, updatedData, function(err) {
       if (err) {
-        return res.status(400).json({
+        return res.status(500).json({
           status: 'error'
           , msg: 'Database error?'
         });
