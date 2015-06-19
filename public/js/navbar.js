@@ -11,5 +11,9 @@ $(function () {
   $("#goRegister").click(function() {
     $("#registerModal").modal('show');
   });
+  $("#searchButton").click(function() {
+    event.preventDefault();
+    window.location.href = '/search/' + $("#keyword").val();
+  })
 })
 

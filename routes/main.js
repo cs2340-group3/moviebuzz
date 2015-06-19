@@ -3,12 +3,7 @@ var router = express.Router();
 
 // Set up the root route
 router.get('/', function(req, res) {
-  var loggedInfo = "";
-  if (req.user === undefined) {
-    loggedInfo = undefined;
-  } else {
-    loggedInfo = req.user.username;
-  }
+  var loggedInfo = req.user ? req.user.username : "";
   res.render('welcome', {
     username: loggedInfo
     , csrfToken: req.csrfToken()
@@ -16,3 +11,4 @@ router.get('/', function(req, res) {
 });
 
 module.exports = router;
+

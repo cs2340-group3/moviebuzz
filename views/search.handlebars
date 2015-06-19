@@ -1,0 +1,7 @@
+<ul class="movie_list">
+  {{#each movies}}
+  <li>{{this.title}} ({{this.year}})</li>
+  {{else}}
+    <p>No result</p>
+  {{/each}}
+</ul>
