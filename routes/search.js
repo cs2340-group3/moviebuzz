@@ -3,7 +3,6 @@ var router = express.Router();
 // This is Dr. Water's API
 // TODO: Put this API key to config
 var rotten = require('rotten-tomatoes-api')('yedukp76ffytfuy24zsqk7f5');
-var util = require('util');
 
 router.get('/search/:keyword', function (req, res) {
   var query = req.params.keyword;
