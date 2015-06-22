@@ -92,9 +92,6 @@ router.get('/search/:keyword', function (req, res) {
 });
 
 router.get('/recent/dvd', function (req, res) {
-  if (!req.isAuthenticated()) {
-    return res.redirect('/');
-  }
   var loggedInfo = req.user ? req.user.username : "";
   return rotten.listDvdsNewReleases({ page_limit: 20 }, function(err, val) {
     if (err) {
@@ -104,7 +101,6 @@ router.get('/recent/dvd', function (req, res) {
       username: loggedInfo
       , csrfToken: req.csrfToken()
       , movies: val.movies
-      , dvd: true
     });
   });
 });
@@ -119,7 +115,6 @@ router.get('/recent/theaters', function (req, res) {
       username: loggedInfo
       , csrfToken: req.csrfToken()
       , movies: val.movies
-      , dvd: false
     });
   });
 });
