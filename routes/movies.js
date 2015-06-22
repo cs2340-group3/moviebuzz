@@ -12,6 +12,22 @@ function tomatoesError(err, loggedInfo, req) {
   });
 }
 
+router.get('/movie/:id', function(req, res) {
+  var id = req.params.id;
+  return rotten.movieGet({ id: id }, function(err, val) {
+    var loggedInfo = req.user ? req.user.username : "";
+    if (err) {
+      return tomatoesError(err, loggedInfo, req);
+    }
+    console.log('test');
+    return res.render('movie', {
+      username: loggedInfo
+      , csrfToken: req.csrfToken()
+      , movie: val
+    });
+  });
+});
+
 router.get('/search/:keyword', function (req, res) {
   var query = req.params.keyword;
   return rotten.movieSearch({ q: query, page_limit: 20 }, function(err, val) {
