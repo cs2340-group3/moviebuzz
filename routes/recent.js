@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-// TODO: Put this API key to config
-var rotten = require('rotten-tomatoes-api')('yedukp76ffytfuy24zsqk7f5');
+var rotten = require('../config/rotten.js');
 
 function tomatoesError(err, loggedInfo, req) {
   res.status('400').render('error', {
