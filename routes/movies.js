@@ -3,6 +3,7 @@ var router = express.Router();
 // This is Dr. Water's API
 // TODO: Put this API key to config
 var rotten = require('rotten-tomatoes-api')('yedukp76ffytfuy24zsqk7f5');
+var async = require('async');
 var Rating = require('../models/rating');
 
 // require authentication
@@ -56,8 +57,13 @@ router.post('/movie/:id/rate', function(req, res) {
   console.log('test');
 
   var query = { username: username, movieId: movieId };
-  var newDocument = 
-    { username: username, movieId: movieId, score: score, review: review };
+  var newDocument = {
+    username: username
+    , movieId: movieId
+    , major: req.user.major
+    , score: score
+    , review: review
+  };
 
   return Rating.findOneAndUpdate(query, newDocument, {upsert: true}, function(err, movie) {
     var loggedInfo = req.user ? req.user.username : "";
@@ -88,6 +94,26 @@ router.get('/search/:keyword', function (req, res) {
       , csrfToken: req.csrfToken()
       , movies: val.movies
     });
+  });
+});
+
+router.get('/recommendations', function(req, res) {
+  var loggedInfo = req.user ? req.user.username : "";
+  Rating.find({ major: req.user.major }, function(err, ratings) {
+    // for each rating in the array returned from the db, get the movie details
+    async.map(
+      ratings,
+      function(rating, cb) {
+        return rotten.movieGet({ id: rating.movieId }, cb);
+      },
+      function(err, movies) {
+        return res.render('movies', {
+          username: loggedInfo
+          , csrfToken: req.csrfToken()
+          , movies: movies
+        });
+      }
+    );
   });
 });
 
