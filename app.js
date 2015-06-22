@@ -62,11 +62,8 @@ app.use('/', authRoutes);
 var profileRoutes = require('./routes/profile');
 app.use('/', profileRoutes);
 
-var searchRoutes = require('./routes/search');
-app.use('/', searchRoutes);
-
-var recentRoutes = require('./routes/recent');
-app.use('/', recentRoutes);
+var moviesRoutes = require('./routes/movies');
+app.use('/', moviesRoutes);
 
 // CSURF error handler
 app.use(function (err, req, res, next) {
