@@ -45,7 +45,6 @@ app.use(csrf());
 var hbs = handlebars.create({ defaultLayout: 'main' });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.enable('view cache');
 
 // Use the configuration to connect database
 var DB = require('./config/database');
