@@ -1,0 +1,30 @@
+<link href="/vendor/raty/lib/jquery.raty.css" rel="stylesheet">
+<script src="/vendor/raty/lib/jquery.raty.js"></script>
+
+<img src="{{movie.posters.detailed}}"></img>
+
+<h1>{{movie.title}}</h1>
+
+<p>{{movie.synopsis}}</p>
+
+<h2>Your Rating</h2>
+<form id="rating-form" method="POST" action="/movie/{{movie.id}}/rate">
+  <div class="input-group">
+    <div id="user-score"></div>
+    <textarea class="form-control" name="review" placeholder="Type your review..." name="keyword" id="review">{{userRating.review}}</textarea>
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <div class="input-group-btn">
+      <button type="submit" class="btn btn-default">Submit Rating</button>
+    </div>
+  </div>
+</form>
+
+<script>
+  $('#user-score').raty({
+    {{#if userRating}}
+      score: {{userRating.score}},
+    {{/if}}
+    path: '/vendor/raty/lib/images'
+  });
+</script>
+

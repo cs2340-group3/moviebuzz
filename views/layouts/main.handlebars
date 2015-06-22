@@ -25,12 +25,13 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      {{#if username}}
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Recent<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/recent/dvd">DVDs</a></li>
-            <li><a href="/recent/movie">Movies</a></li>
+            <li><a href="/recent/theaters">Theater Releases</a></li>
           </ul>
         </li>
       </ul>
@@ -44,6 +45,7 @@
           </div>
         </form>
       </div>
+      {{/if}}
       <ul class="nav navbar-nav navbar-right">
         {{#if username}}
         <li><a href="/profile">{{username}}</a></li>
