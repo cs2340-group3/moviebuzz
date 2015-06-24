@@ -2,15 +2,17 @@
   {{#each movies}}
   
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-    <p> blah blah blah stuff</p>
-      <img src="{{this.posters.detailed}}" alt="moviePoster">
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" src="{{this.posters.detailed}}" alt="moviePoster">
+    </a>
   </div>
- </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{this.movie}} ({{this.year}})</h4>
+    {{this.description}}
+  </div>
 </div>
-
         
         
   {{else}}
