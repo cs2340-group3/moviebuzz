@@ -2,6 +2,7 @@ var express = require('express');
 var User = require('../models/user');
 var passport = require('passport');
 var router = express.Router();
+var email_valid = require('email-validator');
 
 function tryLogout(req, res, next) {
     if (req.user) {

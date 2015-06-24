@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var RatingSchema = new Schema({
   username: String,
+  major: String,
   movieId: String,
   score: Number,
   review: String
