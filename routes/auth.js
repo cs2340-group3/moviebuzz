@@ -56,6 +56,12 @@ router.route('/register')
          , csrfToken: req.csrfToken()
       });
     }
+    if (req.body.password !== req.body.confirmPassword) {
+      return res.status(403).json({
+          message: "Error: your passwords do not match"
+          , csrfToken: req.csrfToken()
+      });
+    }
     if (!email_valid.validate(req.body.email)) { // make sure email is valid
       return res.status(403).json({ // if invalid email reload the page
         message: "Error: The email address you submitted is invalid"
