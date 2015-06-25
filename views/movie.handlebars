@@ -47,16 +47,16 @@
     <p>Year: {{movie.year}}</p>
     <!-- The Following code does not work -->
     <p>Director(s):
-      {{#each abridged_directors}}
+      {{#each movie.abridged_directors}}
         <span>{{name}}&nbsp;</span>
       {{/each}}
     </p>
     <p>Cast:
-      {{#each abridged_cast}}
+      {{#each movie.abridged_cast}}
         {{name}}&nbsp;
       {{/each}}
     </p>
-    <p>Genres: {{#each genres}}{{this}}{{/each}}</p>
+    <p>Genres: {{#each movie.genres}}{{this}}{{/each}}</p>
   </div>
 </div>
 
