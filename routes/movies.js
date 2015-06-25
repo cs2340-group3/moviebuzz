@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-// This is Dr. Water's API
-// TODO: Put this API key to config
-var rotten = require('rotten-tomatoes-api')('yedukp76ffytfuy24zsqk7f5');
+var rotten = require('../config/rotten.js');
 var async = require('async');
 var Rating = require('../models/rating');
 
@@ -38,7 +36,7 @@ router.get('/movie/:id', function(req, res) {
           , message: err
         });
       }
-
+      console.log(val);
       return res.render('movie', {
         username: loggedInfo
         , csrfToken: req.csrfToken()
@@ -65,7 +63,7 @@ router.post('/movie/:id/rate', function(req, res) {
     , review: review
   };
 
-  return Rating.findOneAndUpdate(query, newDocument, {upsert: true}, function(err, movie) {
+  return Rating.findOneAndUpdate(query, newDocument, { upsert: true }, function(err, movie) {
     var loggedInfo = req.user ? req.user.username : "";
     if (err) {
       return res.status('400').render('error', {
