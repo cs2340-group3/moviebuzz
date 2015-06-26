@@ -9,8 +9,10 @@
     </a>
   </div>
   <div class="media-body">
-    <h4 class="media-heading">{{this.title}} ({{this.year}})</h4>
-   <p>Genres: {{#each this.genres}} {{/each}}</p>
+    <li><a href="/movie/{{this.id}}">{{this.title}}</a> ({{this.year}})</li>
+    
+   <p>Description: {{this.synopsis}}</p>
+  
    
     <p>Rated : {{this.mpaa_rating}} </p>
   </div>

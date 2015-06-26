@@ -115,6 +115,7 @@ router.get('/recent/theaters', function (req, res) {
     if (err) {
       return tomatoesError(err, loggedInfo, req);
     }
+    console.log(val);
     return res.render('movies', {
       username: loggedInfo
       , csrfToken: req.csrfToken()
