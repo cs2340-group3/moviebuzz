@@ -36,7 +36,6 @@ router.get('/movie/:id', function(req, res) {
           , message: err
         });
       }
-      console.log(val);
       return res.render('movie', {
         username: loggedInfo
         , csrfToken: req.csrfToken()

@@ -10,6 +10,7 @@ function tryLogout(req, res, next) {
     }
     next();
 }
+
 router.route('/login')
   .all(tryLogout)
   .post(function(req, res, next) {
@@ -19,7 +20,7 @@ router.route('/login')
           return res.status(500).json({
             message: err
             , csrfToken: req.csrfToken()
-          })
+          });
         }
         if (!user) {
           return res.status(403).json({
@@ -94,4 +95,3 @@ router.get('/logout', function(req, res) {
 });
 
 module.exports = router;
-
