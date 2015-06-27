@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-// This is Dr. Water's API
-// TODO: Put this API key to config
-var rotten = require('rotten-tomatoes-api')('yedukp76ffytfuy24zsqk7f5');
+var rotten = require('../config/rotten.js');
 var Rating = require('../models/rating');
 
 // require authentication
@@ -115,7 +113,6 @@ router.get('/recent/theaters', function (req, res) {
     if (err) {
       return tomatoesError(err, loggedInfo, req);
     }
-    console.log(val);
     return res.render('movies', {
       username: loggedInfo
       , csrfToken: req.csrfToken()
