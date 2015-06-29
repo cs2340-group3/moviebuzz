@@ -1,1 +1,9 @@
-<h5> You are admin </h5>
+{{#if error}}
+  <h4>{{error}}</h4>
+{{/if}}
+
+<ul>
+{{#each users}}
+  <li>{{username}}</li>
+{{/each}}
+</ul>
