@@ -64,6 +64,9 @@ app.use('/', profileRoutes);
 var moviesRoutes = require('./routes/movies');
 app.use('/', moviesRoutes);
 
+var adminRoutes = require('./routes/admin');
+app.use('/', adminRoutes);
+
 // CSURF error handler
 app.use(function (err, req, res, next) {
   if (err.code !== 'EBADCSRFTOKEN') {
