@@ -7,6 +7,7 @@ router.get('/', function(req, res) {
   res.render('welcome', {
     username: loggedInfo
     , csrfToken: req.csrfToken()
+    , is_admin: req.user ? req.user.is_admin : false
   });
 });
 

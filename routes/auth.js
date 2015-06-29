@@ -2,6 +2,7 @@ var express = require('express');
 var User = require('../models/user');
 var passport = require('passport');
 var router = express.Router();
+var email_valid = require('email-validator');
 
 function tryLogout(req, res, next) {
     if (req.user) {
@@ -9,6 +10,7 @@ function tryLogout(req, res, next) {
     }
     next();
 }
+
 router.route('/login')
   .all(tryLogout)
   .post(function(req, res, next) {
@@ -18,7 +20,7 @@ router.route('/login')
           return res.status(500).json({
             message: err
             , csrfToken: req.csrfToken()
-          })
+          });
         }
         if (!user) {
           return res.status(403).json({
@@ -93,4 +95,3 @@ router.get('/logout', function(req, res) {
 });
 
 module.exports = router;
-

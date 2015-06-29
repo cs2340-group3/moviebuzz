@@ -45,7 +45,6 @@ app.use(csrf());
 var hbs = handlebars.create({ defaultLayout: 'main' });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.enable('view cache');
 
 // Use the configuration to connect database
 var DB = require('./config/database');
@@ -64,6 +63,9 @@ app.use('/', profileRoutes);
 
 var moviesRoutes = require('./routes/movies');
 app.use('/', moviesRoutes);
+
+var adminRoutes = require('./routes/admin');
+app.use('/', adminRoutes);
 
 // CSURF error handler
 app.use(function (err, req, res, next) {

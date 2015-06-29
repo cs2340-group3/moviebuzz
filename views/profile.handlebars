@@ -1,6 +1,4 @@
 <link href="vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
-<script src="vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-<script src="js/profile.js"></script>
 
 <div class="container">
   <div class="jumbotron">
@@ -27,7 +25,7 @@
 
     <div>
       <p style="display: inline">Your major: </p>
-      <a href="" id="major" data-type="text"
+      <a href="" id="major" data-type="select" name="major"
          data-url="/profile" data-title="Enter a new major">{{major}}</a>
     </div>
 
@@ -38,4 +36,7 @@
     </div>
   </div>
 </div>
+
+<script src="vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="js/profile.js"></script>
 
