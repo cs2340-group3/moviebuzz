@@ -17,6 +17,7 @@ router.route('/profile')
     res.render('profile', {
       username: req.user.username
       , email: req.user.email
+      , is_admin: req.user ? req.user.is_admin : false
       , firstname: req.user.firstname
       , lastname: req.user.lastname
       , major: req.user.major

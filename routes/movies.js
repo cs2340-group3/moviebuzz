@@ -40,6 +40,7 @@ router.get('/movie/:id', function(req, res) {
         username: loggedInfo
         , csrfToken: req.csrfToken()
         , movie: val
+        , is_admin: req.user ? req.user.is_admin : false
         , userRating: rating
       });
     });
@@ -67,6 +68,7 @@ router.post('/movie/:id/rate', function(req, res) {
     if (err) {
       return res.status('400').render('error', {
         username: loggedInfo
+        , is_admin: req.user ? req.user.is_admin : false
         , csrfToken: req.csrfToken()
         , message: err
       });
@@ -83,11 +85,13 @@ router.get('/search/:keyword', function (req, res) {
       return res.status('400').render('error', {
         username: loggedInfo
         , csrfToken: req.csrfToken()
+        , is_admin: req.user ? req.user.is_admin : false
         , message: err
       });
     }
     return res.render('movies', {
       username: loggedInfo
+      , is_admin: req.user ? req.user.is_admin : false
       , csrfToken: req.csrfToken()
       , movies: val.movies
     });
@@ -106,6 +110,7 @@ router.get('/recommendations', function(req, res) {
       function(err, movies) {
         return res.render('movies', {
           username: loggedInfo
+          , is_admin: req.user ? req.user.is_admin : false
           , csrfToken: req.csrfToken()
           , movies: movies
         });
@@ -122,6 +127,7 @@ router.get('/recent/dvd', function (req, res) {
     }
     return res.render('movies', {
       username: loggedInfo
+      , is_admin: req.user ? req.user.is_admin : false
       , csrfToken: req.csrfToken()
       , movies: val.movies
     });
@@ -136,6 +142,7 @@ router.get('/recent/theaters', function (req, res) {
     }
     return res.render('movies', {
       username: loggedInfo
+      , is_admin: req.user ? req.user.is_admin : false
       , csrfToken: req.csrfToken()
       , movies: val.movies
     });
