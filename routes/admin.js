@@ -16,7 +16,6 @@ router.get('/admin', function(req, res) {
         , error: "Mongo error"
       });
     }
-    console.log(users);
     return res.render('admin', {
       username: loggedInfo
       , csrfToken: req.csrfToken()
