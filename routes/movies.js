@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var rotten = require('../config/rotten.js');
 var async = require('async');
+var rateLimit = require('function-rate-limit');
 var Rating = require('../models/rating');
 
 // require authentication
@@ -104,9 +105,11 @@ router.get('/recommendations', function(req, res) {
     // for each rating in the array returned from the db, get the movie details
     async.map(
       ratings,
-      function(rating, cb) {
+      // Rotten Tomatoes limits API calls to 10 per second.
+      // We limit to 5 per second (1000ms) to be safe.
+      rateLimit(5, 1000, function(rating, cb) {
         return rotten.movieGet({ id: rating.movieId }, cb);
-      },
+      }),
       function(err, movies) {
         return res.render('movies', {
           username: loggedInfo
