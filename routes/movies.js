@@ -53,7 +53,6 @@ router.post('/movie/:id/rate', function(req, res) {
   var movieId = req.params.id;
   var score = req.body.score;
   var review = req.body.review;
-  console.log('test');
 
   var query = { username: username, movieId: movieId };
   var newDocument = {
@@ -100,25 +99,72 @@ router.get('/search/:keyword', function (req, res) {
 });
 
 router.get('/recommendations', function(req, res) {
-  var loggedInfo = req.user ? req.user.username : "";
-  Rating.find({ major: req.user.major }, function(err, ratings) {
-    // for each rating in the array returned from the db, get the movie details
-    async.map(
-      ratings,
-      // Rotten Tomatoes limits API calls to 10 per second.
-      // We limit to 5 per second (1000ms) to be safe.
-      rateLimit(5, 1000, function(rating, cb) {
-        return rotten.movieGet({ id: rating.movieId }, cb);
-      }),
-      function(err, movies) {
-        return res.render('movies', {
-          username: loggedInfo
-          , is_admin: req.user ? req.user.is_admin : false
-          , csrfToken: req.csrfToken()
-          , movies: movies
+  async.waterfall([
+    function(cb) {
+      Rating.aggregate()
+        .match({ major: req.user.major })
+        .group({
+          _id: { movieId: '$movieId' },
+          // NOTE: averageUserScore does not end up in the final movie
+          // objects returned from RT. It is only used for sorting.
+          averageUserScore: { $avg: '$score' }
+        })
+        .sort({ averageUserScore: -1 })
+        .exec(cb);
+    },
+
+    // moviesBare is now an array of all movies rated by someone in
+    // the user's major, in descending order by average score. ('bare'
+    // means it doesn't have full details.)
+    function(moviesBare, cb) {
+      // for each sourceMovie from the db...
+      async.concatSeries(moviesBare, function(srcMovieBare, concatCb) {
+        // get the movie details...
+        rotten.movieGet({ id: srcMovieBare._id.movieId }, function(err, srcMovie) {
+          // find similar movies to the source movie
+          rotten.movieSimilar({ id: srcMovieBare._id.movieId }, function(err, result) {
+            if (!result.movies) console.log(result);
+            if (err)
+              concatCb(err);
+            // make an array of [srcMovie, <similar movies...>]
+            result.movies.unshift(srcMovie);
+            // concat that to the array being produced by async.concatSeries
+            concatCb(null, result.movies);
+          });
         });
-      }
-    );
+      }, cb);
+    },
+
+    // filter out movies that this user has rated
+    function(recommendations, cb) {
+      Rating.find({ username: req.user.username }, function(err, ratings) {
+        debugger;
+        if (err) cb(err);
+        recommendations = recommendations.filter(function(recommendation) {
+          return !ratings.some(function(rating) {
+            // NOTE: use "==" here because rating.movieId is a string, while
+            // recommendation.id (which comes from the RottenTomatoes API) is
+            // a number.
+            return rating.movieId == recommendation.id;
+          });
+        });
+        cb(null, recommendations);
+      });
+    }
+  ],
+  
+  // recommendation *should* now be the array of movie recommendations,
+  // including movies the user himself has rated.
+  function(err, recommendations) {
+    if (err) {
+      return tomatoesError(err, req.user.username, req);
+    }
+    res.render('movies', {
+      username: req.user ? req.user.username : ""
+      , is_admin: req.user ? req.user.is_admin : false
+      , csrfToken: req.csrfToken()
+      , movies: recommendations
+    });
   });
 });
 
