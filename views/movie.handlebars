@@ -67,8 +67,10 @@
 <script src="/vendor/raty/lib/jquery.raty.js"></script>
 <script>
   $('#user-score').raty({
-    {{#if userRating}}
+    {{#if userRating.score}}
       score: {{userRating.score}},
+    {{else}}
+      score: 0,
     {{/if}}
     path: '/vendor/raty/lib/images'
     , starType : 'i'
