@@ -1,7 +1,21 @@
+<style>
+
+  body{
+    background: url('http://theartmad.com/wp-content/uploads/2015/04/Movie-Theater-Popcorn-Wallpaper-3.jpg');
+    
+  }
+</style>
+
 <ul class="movie_list">
   {{#each movies}}
-  
 
+
+<div class = "row">
+<div class="col-md-3">
+</div>
+<div class="col-md-6">
+<div class ="panel panel-info">
+<div class = "panel-heading"> <a href="/movie/{{this.id}}">{{this.title}}</a> ({{this.year}})</div>
 <div class="media">
   <div class="media-left">
     <a href="#">
@@ -9,14 +23,18 @@
     </a>
   </div>
   <div class="media-body">
-    <li><a href="/movie/{{this.id}}">{{this.title}}</a> ({{this.year}})</li>
     
-   <p>Description: {{this.synopsis}}</p>
+    
+   <p>Description : {{this.synopsis}} </p>
   
    
     <p>Rated : {{this.mpaa_rating}} </p>
   </div>
 </div>
+</div>
+</div>
+</div>
+
         
     
   {{else}}
