@@ -14,7 +14,7 @@ $(function() {
   }
   $('#firstname').editable();
   $('#lastname').editable();
-  $('#major').editable();
+
   $('#bio').editable();
 });
 

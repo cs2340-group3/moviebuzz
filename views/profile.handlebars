@@ -25,7 +25,7 @@
 
     <div>
       <p style="display: inline">Your major: </p>
-      <a href="" id="major" data-type="text"
+      <a href="" id="major" data-type="select"
          data-url="/profile" data-title="Enter a new major">{{major}}</a>
     </div>
 
@@ -39,4 +39,19 @@
 
 <script src="vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <script src="js/profile.js"></script>
+<script>
+(function() {
+  var majors = ["Computer Science", "Computational Media", "Computer Engineering",
+    "Mechanical Engineering", "Discrete Math", "Industrial Engineering"];
+  var source = [];
+  $.each(majors, function(index, value) {
+    source.push({ value: value, text: value });
+  });
+
+  $('#major').editable({
+    source: source
+    , value: "{{major}}"
+  });
+})();
+</script>
 
