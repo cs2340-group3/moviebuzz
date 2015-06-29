@@ -15,6 +15,18 @@ $(function() {
   $('#firstname').editable();
   $('#lastname').editable();
 
+  var majors = ["Computer Science", "Computational Media", "Computer Engineering",
+    "Mechanical Engineering", "Discrete Math", "Industrial Engineering"];
+  var source = [];
+  $.each(majors, function(index, value) {
+    source.push({ value: value, text: value });
+  });
+
+  $('#major').editable({
+    source: source
+    , value: $('#major').html()
+  });
+
   $('#bio').editable();
 });
 
