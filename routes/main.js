@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
     if (err) {
       return tomatoesError(err, loggedInfo, req);
     }
-    return res.render('movies', {
+    return res.render('welcome', {
       username: loggedInfo
       , csrfToken: req.csrfToken()
       , movies: val.movies
