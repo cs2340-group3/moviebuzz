@@ -1,27 +1,13 @@
 var express = require('express');
 var User = require('../models/user');
 var router = express.Router();
-
-function notLogin(req) {
-  return req.user === undefined;
-}
+var passport = require('passport');
 
 router.route('/profile')
-  .all(function(req, res, next) {
-    if (notLogin(req)) {
-      return res.redirect('/');
-    }
-    next();
-  })
+  .all(passport.requireAuth)
   .get(function(req, res) {
     res.render('profile', {
-      username: req.user.username
-      , email: req.user.email
-      , is_admin: req.user ? req.user.is_admin : false
-      , firstname: req.user.firstname
-      , lastname: req.user.lastname
-      , major: req.user.major
-      , bio: req.user.bio
+      user: req.user
       , csrfToken: req.csrfToken()
     });
   })
@@ -40,7 +26,6 @@ router.route('/profile')
       });
     }
     var updatedData = {};
-    // TODO: First name, Last name, and major should contain only letters
     updatedData[req.body.name] = req.body.value;
     User.update({ username: req.user.username }, updatedData, function(err) {
       if (err) {

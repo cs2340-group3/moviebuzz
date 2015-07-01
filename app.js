@@ -42,9 +42,11 @@ app.use(passport.session());
 app.use(csrf());
 
 // Enable handlebars template engine
-var hbs = handlebars.create({ defaultLayout: 'main' });
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.engine('hbs', handlebars({
+  defaultLayout: 'main'
+  , extname: '.hbs'
+}));
+app.set('view engine', 'hbs');
 
 // Use the configuration to connect database
 var DB = require('./config/database');
@@ -74,7 +76,7 @@ app.use(function (err, req, res, next) {
   }
   res.status(403);
   res.render('error', {
-    message: 'Form tempered with'
+    message: 'Form tampered with'
   });
 });
 
@@ -83,7 +85,8 @@ app.use(function (err, req, res, next) {
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
-    message: err.message,
+    user: req.user
+    , message: err.message,
   });
 });
 

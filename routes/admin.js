@@ -1,26 +1,17 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
 var User = require('../models/user');
 
-router.get('/admin', function(req, res) {
-  if (!req.user.is_admin) {
-    return res.redirect('/');
-  }
-  var loggedInfo = req.user ? req.user.username : "";
+router.get('/admin', passport.requireAdmin, function(req, res, next) {
   User.find({}, function (err, users) {
     if (err) {
-      return res.render('admin', {
-        username: loggedInfo
-        , csrfToken: req.csrfToken()
-        , is_admin: req.user ? req.user.is_admin : false
-        , error: "Mongo error"
-      });
+      next(err);
     }
     return res.render('admin', {
-      username: loggedInfo
-      , csrfToken: req.csrfToken()
-      , is_admin: req.user ? req.user.is_admin : false
+      user: req.user
       , users: users
+      , csrfToken: req.csrfToken()
     });
   });
 });
