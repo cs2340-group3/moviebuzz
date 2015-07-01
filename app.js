@@ -42,9 +42,11 @@ app.use(passport.session());
 app.use(csrf());
 
 // Enable handlebars template engine
-var hbs = handlebars.create({ defaultLayout: 'main' });
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.engine('hbs', handlebars({
+  defaultLayout: 'main'
+  , extname: '.hbs'
+}));
+app.set('view engine', 'hbs');
 
 // Use the configuration to connect database
 var DB = require('./config/database');
