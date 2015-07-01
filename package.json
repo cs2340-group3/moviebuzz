@@ -41,7 +41,7 @@
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "saintedlama/passport-local-mongoose#fc2429938cc7b76a917e38b359485fbc39544bbb",
-    "rotten-tomatoes-api": "0.0.1",
+    "rotten-tomatoes-api": "vergenzt/rotten-tomatoes-node#master",
     "serve-favicon": "^2.2.1"
   },
   "devDependencies": {
