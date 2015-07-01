@@ -56,7 +56,7 @@ router.route('/register')
          , csrfToken: req.csrfToken()
       });
     }
-    if (req.body.password !== req.body.confirmPassword) {
+    if (req.body.password !== req.body.inputPasswordConfirm) { //back-end validation in addition to client-side
       return res.status(403).json({
           message: "Error: your passwords do not match"
           , csrfToken: req.csrfToken()
@@ -83,7 +83,7 @@ router.route('/register')
         }
         if (err && err.code !== 11000) { // Other error
           return res.status(500).json({
-            message: err
+            message: err.message
             , csrfToken: req.csrfToken()
           });
         }
