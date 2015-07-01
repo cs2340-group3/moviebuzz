@@ -42,7 +42,7 @@ app.use(passport.session());
 app.use(csrf());
 
 // Enable handlebars template engine
-var hbs = handlebars.create({ defaultLayout: 'main' });
+var hbs = handlebars.create(require('./config/handlebars'));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 

@@ -32,7 +32,7 @@ router.route('/profile')
         , msg: 'You\'ve sent a null request'
       });
     }
-    var validFields = ["bio", "firstname", "lastname", "major"]
+    var validFields = ["bio", "firstname", "lastname", "major"];
     if (validFields.indexOf(req.body.name) == -1) {
       return res.status(400).json({
         status: 'error'
