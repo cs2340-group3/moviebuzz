@@ -76,7 +76,7 @@ app.use(function (err, req, res, next) {
   }
   res.status(403);
   res.render('error', {
-    message: 'Form tempered with'
+    message: 'Form tampered with'
   });
 });
 
@@ -85,7 +85,8 @@ app.use(function (err, req, res, next) {
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
-    message: err.message,
+    user: req.user
+    , message: err.message,
   });
 });
 

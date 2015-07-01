@@ -5,35 +5,38 @@
     {{#if message}}
       <div class="alert alert-warning" role="alert">{{message}}</div>
     {{/if}}
+
     <h2>User profile</h2>
 
-    <p>Username: {{username}}</p>
-    <p>Email: {{email}}</p>
+    {{#with user}}
+      <p>Username: {{username}}</p>
+      <p>Email: {{email}}</p>
 
-    <div id="_token" class="hidden" data-token="{{csrfToken}}"></div>
-    <div>
-      <p style="display: inline">Your first name: </p>
-      <a href="" id="firstname" data-type="text"
-         data-url="/profile" data-title="Enter a new first name">{{firstname}}</a>
-    </div>
+      <div id="_token" class="hidden" data-token="{{csrfToken}}"></div>
+      <div>
+        <p style="display: inline">Your first name: </p>
+        <a href="" id="firstname" data-type="text"
+           data-url="/profile" data-title="Enter a new first name">{{firstname}}</a>
+      </div>
 
-    <div>
-      <p style="display: inline">Your last name: </p>
-      <a href="" id="lastname" data-type="text"
-         data-url="/profile" data-title="Enter a new last name">{{lastname}}</a>
-    </div>
+      <div>
+        <p style="display: inline">Your last name: </p>
+        <a href="" id="lastname" data-type="text"
+           data-url="/profile" data-title="Enter a new last name">{{lastname}}</a>
+      </div>
 
-    <div>
-      <p style="display: inline">Your major: </p>
-      <a href="" id="major" data-type="select" name="major"
-         data-url="/profile" data-title="Enter a new major">{{major}}</a>
-    </div>
+      <div>
+        <p style="display: inline">Your major: </p>
+        <a href="" id="major" data-type="select" name="major"
+           data-url="/profile" data-title="Enter a new major">{{major}}</a>
+      </div>
 
-    <div>
-      <p style="display: inline">Your personal bio: </p>
-      <a href="" id="bio" data-type="textarea"
-         data-url="/profile" data-title="Enter a new bio">{{bio}}</a>
-    </div>
+      <div>
+        <p style="display: inline">Your personal bio: </p>
+        <a href="" id="bio" data-type="textarea"
+           data-url="/profile" data-title="Enter a new bio">{{bio}}</a>
+      </div>
+    {{/with}}
   </div>
 </div>
 
