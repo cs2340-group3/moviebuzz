@@ -7,7 +7,7 @@ var morgan = require('morgan');
 var expressSession = require('express-session');
 var csrf = require('csurf');
 var favicon = require('serve-favicon');
-var handlebars  = require('express-handlebars');
+var handlebars = require('express-handlebars');
 
 // Set up logging
 if (process.env.NODE_ENV !== 'test') {
@@ -42,10 +42,8 @@ app.use(passport.session());
 app.use(csrf());
 
 // Enable handlebars template engine
-app.engine('hbs', handlebars({
-  defaultLayout: 'main'
-  , extname: '.hbs'
-}));
+var hbs = handlebars.create(require('./config/handlebars'));
+app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 // Use the configuration to connect database
@@ -74,26 +72,25 @@ app.use(function (err, req, res, next) {
   if (err.code !== 'EBADCSRFTOKEN') {
     return next(err);
   }
-  res.status(403);
-  res.render('error', {
+  res.status(403).render('error', {
     message: 'Form tampered with'
   });
 });
 
 // General error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     user: req.user
-    , message: err.message,
+    , message: err.message
   });
 });
 
 module.exports = app;
 if (!module.parent) {
   var port = process.env.PORT || 3000; // port 3000 as default
-  app.listen(port, function() {
+  app.listen(port, function () {
     console.log('Listening on port ' + port);
   });
 }

@@ -5,7 +5,7 @@ var passport = require('passport');
 
 router.route('/profile')
   .all(passport.requireAuth)
-  .get(function(req, res) {
+  .get(function (req, res) {
     res.render('profile', {
       user: req.user
       , csrfToken: req.csrfToken()
@@ -18,7 +18,7 @@ router.route('/profile')
         , msg: 'You\'ve sent a null request'
       });
     }
-    var validFields = ["bio", "firstname", "lastname", "major"]
+    var validFields = ["bio", "firstname", "lastname", "major"];
     if (validFields.indexOf(req.body.name) == -1) {
       return res.status(400).json({
         status: 'error'
@@ -27,7 +27,7 @@ router.route('/profile')
     }
     var updatedData = {};
     updatedData[req.body.name] = req.body.value;
-    User.update({ username: req.user.username }, updatedData, function(err) {
+    User.update({ username: req.user.username }, updatedData, function (err) {
       if (err) {
         return res.status(500).json({
           status: 'error'

@@ -4,3 +4,4 @@ registrationUseCase.txt
 .idea/
 data/
 public/vendor/*
+npm-debug.log

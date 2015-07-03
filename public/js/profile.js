@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   $.fn.editable.defaults.ajaxOptions = {
     type: "PUT"
   };
@@ -11,15 +11,15 @@ $(function() {
   $.fn.editable.defaults.error = function (xhr, status, error) {
     var err = JSON.parse(xhr.responseText);
     return err.msg;
-  }
+  };
   $('#firstname').editable();
   $('#lastname').editable();
 
   var majors = ["Computer Science", "Computational Media", "Computer Engineering",
     "Mechanical Engineering", "Discrete Math", "Industrial Engineering"];
   var source = [];
-  $.each(majors, function(index, value) {
-    source.push({ value: value, text: value });
+  $.each(majors, function (index, value) {
+    source.push({value: value, text: value});
   });
 
   $('#major').editable({
