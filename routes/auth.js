@@ -28,6 +28,12 @@ router.route('/login')
             , csrfToken: req.csrfToken()
           });
         }
+        if (user.banned) {
+          return res.status(403).json({
+            message: "You are banned"
+            , csrfToken: req.csrfToken()
+          });
+        }
         req.login(user, function(err) {
           if(err) {
             return res.status(403).json({
