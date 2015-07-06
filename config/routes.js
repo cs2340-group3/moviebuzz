@@ -14,9 +14,11 @@ module.exports = function(app) {
   app.get('/', main.renderWelcomePage);
 
   var auth = require('../api/auth');
-  app.post('/login', auth.login);
-  app.post('/register', auth.register);
-  app.get('/logout', auth.logout);
+  app.use(express.Router()
+    .post('/login', auth.login)
+    .post('/register', auth.register)
+    .get('/logout', auth.logout)
+  );
 
   var movies = require('../api/movies');
   app.use(express.Router()
