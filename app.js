@@ -43,16 +43,9 @@ app.set('view engine', 'hbs');
 require('./config/database')();
 
 // Set up app routes
-app.use('/'
-  , require('./routes/main')
-  , require('./routes/auth')
-  , require('./routes/profile')
-  , require('./routes/movies')
-  , require('./routes/admin')
-);
+require('./config/routes')(app);
 
 // General error handler
-// no stacktraces leaked to user
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
