@@ -20,6 +20,11 @@ module.exports = {
           message: info.message
           , csrfToken: req.csrfToken()
         });
+      } else if (user.banned) {
+        return res.status(403).json({
+          message: "You are banned"
+          , csrfToken: req.csrfToken()
+        });
       }
       req.login(user, function(err) {
         if(err) {
