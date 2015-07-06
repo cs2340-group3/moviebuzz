@@ -1,3 +1,8 @@
+/*
+ * csrf.js
+ * Set up cross-site request forgery (CSRF) protection.
+ */
+
 var csrf = require('csurf');
 
 module.exports = function(app) {

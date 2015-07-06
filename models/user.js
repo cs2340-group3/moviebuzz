@@ -1,3 +1,8 @@
+/*
+ * user.js
+ * Sets up a User model for storing a user's information.
+ */
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');

@@ -1,3 +1,8 @@
+/*
+ * passport.js
+ * Set up Passport.js for user authentication and authorization.
+ */
+
 var passport = require('passport');
 var expressSession = require('express-session');
 var User = require('../models/user');
