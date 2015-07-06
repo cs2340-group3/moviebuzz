@@ -1,49 +1,42 @@
-var express = require('express');
 var User = require('../models/user');
 var passport = require('passport');
-var router = express.Router();
 var email_valid = require('email-validator');
 
-function tryLogout(req, res, next) {
-    if (req.user) {
-      req.logout();
-    }
-    next();
-}
-
-router.route('/login')
-  .all(tryLogout)
-  .post(function(req, res, next) {
-      passport.authenticate('local',
-      function(err, user, info) {
-        if (err) {
-          return res.status(500).json({
+module.exports = {
+  /**
+   * Authenticate an existing user.
+   */
+  login: function(req, res, next) {
+    passport.authenticate('local',
+    function(err, user, info) {
+      if (err) {
+        return res.status(500).json({
+          message: err
+          , csrfToken: req.csrfToken()
+        });
+      }
+      if (!user) {
+        return res.status(403).json({
+          message: info.message
+          , csrfToken: req.csrfToken()
+        });
+      }
+      req.login(user, function(err) {
+        if(err) {
+          return res.status(403).json({
             message: err
             , csrfToken: req.csrfToken()
           });
         }
-        if (!user) {
-          return res.status(403).json({
-            message: info.message
-            , csrfToken: req.csrfToken()
-          });
-        }
-        req.login(user, function(err) {
-          if(err) {
-            return res.status(403).json({
-              message: err
-              , csrfToken: req.csrfToken()
-            });
-          }
-          return res.sendStatus(200);
-        });
-      })(req, res, next);
-    }
-);
+        return res.sendStatus(200);
+      });
+    })(req, res, next);
+  },
 
-router.route('/register')
-  .all(tryLogout)
-  .post(function(req, res, next) {
+  /**
+   * Register a new user.
+   */
+  register: function(req, res, next) {
     var alphanumeric = /^[a-zA-Z0-9]+$/;
     if (!alphanumeric.test(req.body.username)) {
       return res.status(403).json({
@@ -87,11 +80,14 @@ router.route('/register')
         });
       }
     );
-  });
+  },
 
-router.get('/logout', function(req, res) {
-  req.logout();
-  return res.redirect("/"); //redirect to root if user logs out
-});
+  /**
+   * Log out a currently logged in user.
+   */
+  logout: function(req, res, next) {
+    req.logout();
+    return res.redirect("/"); //redirect to root if user logs out
+  }
+};
 
-module.exports = router;

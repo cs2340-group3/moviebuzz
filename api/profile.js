@@ -1,17 +1,20 @@
-var express = require('express');
 var User = require('../models/user');
-var router = express.Router();
-var passport = require('passport');
 
-router.route('/profile')
-  .all(passport.requireAuth)
-  .get(function (req, res) {
+module.exports = {
+  /**
+   * Render the user's profile to the response.
+   */
+  renderProfile: function (req, res) {
     res.render('profile', {
       user: req.user
       , csrfToken: req.csrfToken()
     });
-  })
-  .put(function (req, res) {
+  },
+
+  /**
+   * Update the user's profile.
+   */
+  updateProfile: function (req, res) {
     if (!req.body) {
       return res.status(400).json({
         status: 'error'
@@ -36,7 +39,6 @@ router.route('/profile')
       }
     });
     return res.sendStatus(200);
-  });
-
-module.exports = router;
+  }
+};
 

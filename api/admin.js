@@ -1,11 +1,10 @@
-var express = require('express');
-var passport = require('passport');
-var router = express.Router();
 var User = require('../models/user');
 
-router.route('/admin')
-  .all(passport.requireAdmin)
-  .get(function (req, res, next) {
+module.exports = {
+  /**
+   * Render the admin dashboard.
+   */
+  renderAdminDashboard: function (req, res, next) {
     User.find({}, function (err, users) {
       if (err) {
         next(err);
@@ -16,8 +15,12 @@ router.route('/admin')
         , csrfToken: req.csrfToken()
       });
     });
-  })
-  .delete(function (req, res) {
+  },
+
+  /**
+   * Delete a user's account.
+   */
+  deleteUser: function (req, res) {
     var usernameRemove = req.body.username;
     User.remove({ username: usernameRemove }, function (err) {
       if (err) {
@@ -27,8 +30,12 @@ router.route('/admin')
       }
       return res.status(200).json({});
     });
-  })
-  .put(function (req, res) {
+  },
+
+  /**
+   * Modify a user's account status (ban, unban, unlock).
+   */
+  modifyUserStatus: function (req, res) {
     var action = req.body.action;
     var query = { username: req.body.username };
     if (action === "unban") {
@@ -53,7 +60,6 @@ router.route('/admin')
         return res.status(200).json({});
       });
     }
-  });
-
-module.exports = router;
+  }
+};
 
