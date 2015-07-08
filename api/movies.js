@@ -10,11 +10,11 @@ module.exports = {
   renderMovieDetail: function(req, res, next) {
     var id = req.params.id;
     return rotten.movieGet({ id: id }, function(err, val) {
-      var loggedInfo = req.user ? req.user.username : '';
       if (err) {
         return next(err);
       }
-      Rating.findOne({ username: loggedInfo, movieId: id }, function(err, rating) {
+      var username = req.user.username;
+      Rating.findOne({ username: username, movieId: id }, function(err, rating) {
         if (err) {
           return next(err);
         }
