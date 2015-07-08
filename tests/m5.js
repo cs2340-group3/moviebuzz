@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 var lib = require('./lib');
 var assert = require('assert');
 
@@ -11,7 +13,7 @@ describe('M5 functionality', function() {
   // log in at the beginning of these tests
   // /login no longer exist
   before(function() {
-    //return lib.login(browser);
+    // return lib.login(browser);
   });
 
   describe('main page', function() {
@@ -30,6 +32,4 @@ describe('M5 functionality', function() {
 
   });
 });
-
-
 

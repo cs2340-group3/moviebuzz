@@ -15,12 +15,12 @@ var UserSchema = new Schema({
     , trim: true // ' abc ' will be trimmed to 'abc'
     , index: { unique: true }
   },
-  firstname: { //legal first name of user
+  firstname: { // legal first name of user
     type: String
     , lowercase: false
     , trim: true
   },
-  lastname: { //legal last name of user
+  lastname: { // legal last name of user
     type: String
     , lowercase: false
     , trim: true

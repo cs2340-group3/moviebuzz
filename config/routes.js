@@ -38,7 +38,7 @@ module.exports = function(app) {
     .put('/', profile.updateProfile)
   );
 
-  var admin = require('../api/admin')
+  var admin = require('../api/admin');
   app.use('/admin', express.Router()
     .all('*', passport.requireAdmin)
     .get('/', admin.renderAdminDashboard)

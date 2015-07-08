@@ -4,8 +4,8 @@ module.exports = {
   /**
    * Render the admin dashboard.
    */
-  renderAdminDashboard: function (req, res, next) {
-    User.find({}, function (err, users) {
+  renderAdminDashboard: function(req, res, next) {
+    User.find({}, function(err, users) {
       if (err) {
         next(err);
       }
@@ -20,13 +20,13 @@ module.exports = {
   /**
    * Delete a user's account.
    */
-  deleteUser: function (req, res) {
+  deleteUser: function(req, res) {
     var usernameRemove = req.body.username;
-    User.remove({ username: usernameRemove }, function (err) {
+    User.remove({ username: usernameRemove }, function(err) {
       if (err) {
         return res.status(400).json({
           'error': 'Error removing user from MongoDB'
-        })
+        });
       }
       return res.status(200).json({});
     });
@@ -35,25 +35,25 @@ module.exports = {
   /**
    * Modify a user's account status (ban, unban, unlock).
    */
-  modifyUserStatus: function (req, res) {
+  modifyUserStatus: function(req, res, next) {
     var action = req.body.action;
     var query = { username: req.body.username };
-    if (action === "unban") {
-      User.findOneAndUpdate(query, { banned: false }, function (err) {
+    if (action === 'unban') {
+      User.findOneAndUpdate(query, { banned: false }, function(err) {
         if (err) {
           next(err);
         }
         return res.status(200).json({});
       });
-    } else if (action === "unlock") {
-      User.findOneAndUpdate(query, { attempts: 0 }, function (err) {
+    } else if (action === 'unlock') {
+      User.findOneAndUpdate(query, { attempts: 0 }, function(err) {
         if (err) {
           next(err);
         }
         return res.status(200).json({});
       });
-    } else if (action === "ban") {
-      User.findOneAndUpdate(query, { banned: true }, function (err) {
+    } else if (action === 'ban') {
+      User.findOneAndUpdate(query, { banned: true }, function(err) {
         if (err) {
           next(err);
         }

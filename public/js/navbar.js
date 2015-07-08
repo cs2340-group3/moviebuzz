@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
   $("#loginButton").click(function() {
     $.getScript("/js/login.js");
   });
