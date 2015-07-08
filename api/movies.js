@@ -1,5 +1,4 @@
 var async = require('async');
-var rateLimit = require('function-rate-limit');
 
 var rotten = require('../config/rotten.js');
 var Rating = require('../models/rating');
@@ -11,7 +10,7 @@ module.exports = {
   renderMovieDetail: function(req, res, next) {
     var id = req.params.id;
     return rotten.movieGet({ id: id }, function(err, val) {
-      var loggedInfo = req.user ? req.user.username : "";
+      var loggedInfo = req.user ? req.user.username : '';
       if (err) {
         return next(err);
       }
@@ -51,14 +50,14 @@ module.exports = {
       if (err) {
         return next(err);
       }
-      return res.redirect('/movie/' + movieId);
+      return res.redirect('/movie/' + movie.movieId);
     });
   },
 
   /**
    * Search for movies by title.
    */
-  renderSearch: function (req, res, next) {
+  renderSearch: function(req, res, next) {
     var query = req.params.keyword;
     return rotten.movieSearch({ q: query, page_limit: 20 }, function(err, val) {
       if (err) {
@@ -98,11 +97,14 @@ module.exports = {
         async.concatSeries(moviesBare, function(srcMovieBare, concatCb) {
           // get the movie details...
           rotten.movieGet({ id: srcMovieBare._id.movieId }, function(err, srcMovie) {
+            if (err) {
+              concatCb(err);
+            }
             // find similar movies to the source movie
             rotten.movieSimilar({ id: srcMovieBare._id.movieId }, function(err, result) {
-              if (!result.movies) console.log(result);
-              if (err)
+              if (err) {
                 concatCb(err);
+              }
               // make an array of [srcMovie, <similar movies...>]
               result.movies.unshift(srcMovie);
               // concat that to the array being produced by async.concatSeries
@@ -115,20 +117,22 @@ module.exports = {
       // filter out movies that this user has rated
       function(recommendations, cb) {
         Rating.find({ username: req.user.username }, function(err, ratings) {
-          if (err) cb(err);
+          if (err) {
+            cb(err);
+          }
           recommendations = recommendations.filter(function(recommendation) {
             return !ratings.some(function(rating) {
-              // NOTE: use "==" here because rating.movieId is a string, while
+              // NOTE: use '==' here because rating.movieId is a string, while
               // recommendation.id (which comes from the RottenTomatoes API) is
               // a number.
-              return rating.movieId == recommendation.id;
+              return rating.movieId == recommendation.id; // eslint-disable-line
             });
           });
           cb(null, recommendations);
         });
       }
     ],
-    
+
     // recommendation *should* now be the array of movie recommendations,
     // including movies the user himself has rated.
     function(err, recommendations) {
@@ -146,7 +150,7 @@ module.exports = {
   /**
    * Get recent DVD releases.
    */
-  renderDvdReleases: function (req, res, next) {
+  renderDvdReleases: function(req, res, next) {
     return rotten.listDvdsNewReleases({ page_limit: 20 }, function(err, val) {
       if (err) {
         return next(err);
@@ -162,7 +166,7 @@ module.exports = {
   /**
    * Get recent theater releases.
    */
-  renderTheaterReleases: function (req, res, next) {
+  renderTheaterReleases: function(req, res, next) {
     return rotten.listMoviesInTheaters({ page_limit: 20 }, function(err, val) {
       if (err) {
         return next(err);

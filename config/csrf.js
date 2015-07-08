@@ -9,7 +9,7 @@ module.exports = function(app) {
   app.use(csrf());
 
   // CSURF error handler
-  app.use(function (err, req, res, next) {
+  app.use(function(err, req, res, next) {
     if (err.code !== 'EBADCSRFTOKEN') {
       return next(err);
     }

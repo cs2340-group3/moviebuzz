@@ -1,0 +1,31 @@
+{
+  "env": {
+    "node": true
+  },
+  "rules": {
+    // style rules
+    "quotes": [2, "single"],
+    "camelcase": [2, {"properties": "never"}],
+    "brace-style": [2, "1tbs"],
+    "one-var": [2, "never"],
+
+    // spacing rules
+    "indent": [2, 2 /* spaces */],
+    "max-len": [2, 100],
+    "spaced-comment": [2, "always"],
+    "eol-last": 2,
+    "no-multiple-empty-lines": 2,
+    "linebreak-style": 2,
+    "array-bracket-spacing": [2, "never"],
+    "space-before-function-paren": [2, "never"],
+
+    // disable some unwanted defaults
+    "strict": 0,
+    "no-shadow": 0, // since 'err' is frequently shadowed in callbacks
+    "no-underscore-dangle": 0, // since _id is used by mongo
+    "new-cap": [2, {
+      "capIsNewExceptions": ["Router"] // express.Router()
+    }]
+  }
+}
+

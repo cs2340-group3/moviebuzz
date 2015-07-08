@@ -36,11 +36,11 @@ exports.login = function(browser, username, password) {
 exports.assertTextContains = function(browser, selector, expected, message) {
   var elements = browser.queryAll(selector);
   assert(elements.length,
-    "Expected selector '" + selector + "' to return one or more elements");
-  var actual = elements.map(function (elem) {
+    'Expected selector \'' + selector + '\' to return one or more elements');
+  var actual = elements.map(function(elem) {
     return elem.textContent;
-  }).join("").trim().replace(/\s+/g, " ");
-  message = message || "Expected '" + actual + "' to contain '" + expected + "'";
+  }).join('').trim().replace(/\s+/g, ' ');
+  message = message || 'Expected \'' + actual + '\' to contain \'' + expected + '\'';
   assert(actual.indexOf(expected) >= 0, message);
 };
 

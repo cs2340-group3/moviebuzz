@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "./node_modules/.bin/mocha tests/**/*.js",
+    "test": "npm run lint && npm run mocha",
+    "lint": "./node_modules/.bin/eslint **/*.js",
+    "mocha": "./node_modules/.bin/mocha tests/**/*.js",
     "postinstall": "./node_modules/.bin/bower install"
   },
   "repository": {
@@ -45,6 +47,7 @@
     "serve-favicon": "^2.2.1"
   },
   "devDependencies": {
+    "eslint": "^0.24.0",
     "mocha": "^2.2.5",
     "zombie": "3.1.x"
   }

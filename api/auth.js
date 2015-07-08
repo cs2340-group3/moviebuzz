@@ -1,6 +1,6 @@
 var User = require('../models/user');
 var passport = require('passport');
-var email_valid = require('email-validator');
+var emailValid = require('email-validator');
 
 module.exports = {
   /**
@@ -22,7 +22,7 @@ module.exports = {
         });
       } else if (user.banned) {
         return res.status(403).json({
-          message: "You are banned"
+          message: 'You are banned'
           , csrfToken: req.csrfToken()
         });
       }
@@ -41,23 +41,23 @@ module.exports = {
   /**
    * Register a new user.
    */
-  register: function(req, res, next) {
+  register: function(req, res) {
     var alphanumeric = /^[a-zA-Z0-9]+$/;
     if (!alphanumeric.test(req.body.username)) {
       return res.status(403).json({
-         message: "Your username must be alphanumeric"
+         message: 'Your username must be alphanumeric'
          , csrfToken: req.csrfToken()
       });
     }
     if (req.body.password.length < 6) { // Check password length
       return res.status(403).json({
-         message: "Error: your password length is too short"
+         message: 'Error: your password length is too short'
          , csrfToken: req.csrfToken()
       });
     }
-    if (!email_valid.validate(req.body.email)) { // make sure email is valid
+    if (!emailValid.validate(req.body.email)) { // make sure email is valid
       return res.status(403).json({ // if invalid email reload the page
-        message: "Error: The email address you submitted is invalid"
+        message: 'Error: The email address you submitted is invalid'
         , csrfToken: req.csrfToken()
       });
     }
@@ -70,7 +70,7 @@ module.exports = {
       function(err) {
         if (err && err.code === 11000) { // Duplicate key error of Mongoose
           return res.status(403).json({
-            message: "I'm sorry, but someone else has already registered with that email address."
+            message: 'I\'m sorry, but someone else has already registered with that email address.'
             , csrfToken: req.csrfToken()
           });
         }
@@ -90,9 +90,9 @@ module.exports = {
   /**
    * Log out a currently logged in user.
    */
-  logout: function(req, res, next) {
+  logout: function(req, res) {
     req.logout();
-    return res.redirect("/"); //redirect to root if user logs out
+    return res.redirect('/'); // redirect to root if user logs out
   }
 };
 

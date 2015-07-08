@@ -2,10 +2,10 @@ var hbsConfig = {
   defaultLayout: 'main'
   , extname: '.hbs'
   , helpers: {
-    ifCond: function (v1, operator, v2, options) {
+    ifCond: function(v1, operator, v2, options) {
       switch (operator) {
         case '==':
-          return (v1 == v2) ? options.fn(this) : options.inverse(this);
+          return (v1 == v2) ? options.fn(this) : options.inverse(this); // eslint-disable-line
         case '===':
           return (v1 === v2) ? options.fn(this) : options.inverse(this);
         case '<':
