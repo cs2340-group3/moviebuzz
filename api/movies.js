@@ -50,7 +50,7 @@ module.exports = {
       if (err) {
         return next(err);
       }
-      return res.redirect('/movie/' + movie.movieId);
+      return res.redirect('/movie/' + movieId);
     });
   },
 
