@@ -1,3 +1,5 @@
+/* global $ */
+
 function adminError(xhr) {
   var res = JSON.parse(xhr.responseText);
   // TODO: Show this error message to user
@@ -11,10 +13,10 @@ function adminSuccess() {
 function deleteUser(username) {
   $.ajax({
     url: '/admin'
-    , dataType: "json"
+    , dataType: 'json'
     , data: {
       'username': username
-      , '_csrf': $("#adminToken").val()
+      , '_csrf': $('#adminToken').val()
     }
     , type: 'DELETE'
   })
@@ -25,11 +27,11 @@ function deleteUser(username) {
 function changeUserStatus(username, toStatus) {
   $.ajax({
     url: '/admin'
-    , dataType: "json"
+    , dataType: 'json'
     , data: {
       'action': toStatus
       , 'username': username
-      , '_csrf': $("#adminToken").val()
+      , '_csrf': $('#adminToken').val()
     }
     , type: 'PUT'
   })
