@@ -33,3 +33,15 @@ exports.setUp = function() {
 
 };
 
+exports.loginBeforeEach = function() {
+  beforeEach(function(done) {
+    this.agent = exports.request();
+    this.agent
+      .post('/login')
+      .send({
+        username: 'testuser',
+        password: 'testpass'
+      })
+      .end(done);
+  });
+};
