@@ -12,6 +12,7 @@ var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var handlebars = require('express-handlebars');
 var morgan = require('morgan');
+var path = require('path');
 
 // Set up logging
 if (process.env.NODE_ENV !== 'test') {
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public/'));
 
 // Set up favicon of gatech.edu
-app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 
 // Set up Passport.js
 require('./config/passport')(app);
@@ -46,7 +47,7 @@ require('./config/database')();
 require('./config/routes')(app);
 
 // General error handler
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res) {
   res.status(err.status || 500);
   res.render('error', {
     user: req.user
@@ -57,7 +58,7 @@ app.use(function (err, req, res, next) {
 module.exports = app;
 if (!module.parent) {
   var port = process.env.PORT || 3000; // port 3000 as default
-  app.listen(port, function () {
+  app.listen(port, function() {
     console.log('Listening on port ' + port);
   });
 }

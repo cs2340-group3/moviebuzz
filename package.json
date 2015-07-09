@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "npm run lint && npm run mocha",
-    "lint": "./node_modules/.bin/eslint **/*.js",
+    "lint": "./node_modules/.bin/eslint *.js api/*.js config/*.js models/*.js public/js/*.js tests/*.js",
     "mocha": "./node_modules/.bin/mocha tests/**/*.js",
     "postinstall": "./node_modules/.bin/bower install"
   },
