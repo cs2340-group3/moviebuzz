@@ -27,7 +27,8 @@ describe('api/auth.js', function() {
         .expect(403, done);
     });
 
-    it('fails register with incorrect password length, but with valid username and email', function(done) {
+    it('fails register with incorrect password length, but with valid username and email', 
+      function(done) {
       lib.request()
         .post('/register')
         .send({
@@ -38,7 +39,8 @@ describe('api/auth.js', function() {
         .expect(403, done);
     });
 
-    it('fails register with pre-exisitng email address, but with valid username and password', function(done) {
+    it('fails register with pre-exisitng email address, but with valid username and password', 
+      function(done) {
       lib.request()
         .post('/register')
         .send({
@@ -49,7 +51,8 @@ describe('api/auth.js', function() {
         .expect(403, done);
     });
 
-    it('fails register with no email address, but with valid username and password', function(done) {
+    it('fails register with no email address, but with valid username and password', 
+      function(done) {
       lib.request()
         .post('/register')
         .send({
@@ -92,5 +95,4 @@ describe('api/auth.js', function() {
         .expect(200, done);
     });
   });
-
 });
