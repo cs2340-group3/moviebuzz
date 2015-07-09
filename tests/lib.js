@@ -14,13 +14,9 @@ exports.setUp = function() {
   var PASSWORD = 'testpass';
 
   beforeEach(function(done) {
-    User.remove({ username: 'testuser' }, function() {
+    User.remove({}, function() {
       User.register(USER, PASSWORD, done);
     });
-  });
-
-  afterEach(function(done) {
-    User.remove({ username: 'testuser' }, done);
   });
 
   beforeEach(function(done) {
