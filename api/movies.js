@@ -46,11 +46,11 @@ module.exports = {
       , review: review
     };
 
-    return Rating.findOneAndUpdate(query, newDocument, { upsert: true }, function(err, movie) {
+    return Rating.findOneAndUpdate(query, newDocument, { upsert: true }, function(err) {
       if (err) {
         return next(err);
       }
-      return res.redirect('/movie/' + movie.movieId);
+      return res.redirect('/movie/' + movieId);
     });
   },
 
