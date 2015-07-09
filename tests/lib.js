@@ -1,46 +1,35 @@
 // set test environment
 process.env.NODE_ENV = 'test';
 
-var assert = require('assert');
-var Browser = require('zombie');
-
 var app = require('../app');
+var supertest = require('supertest');
 var User = require('../models/user');
 
-exports.setUp = function() {
-  before(function(done) {
-    this.server = app.listen(3001);
-    this.browser = new Browser({ site: 'http://localhost:3001' });
+exports.request = function() {
+  return supertest.agent('localhost:3001');
+};
 
-    User.remove(function() {
-      User.register({ username: 'user', email: 'user@example.com' }, 'pass', done);
+exports.setUp = function() {
+  var USER = { username: 'testuser', email: 'testuser@example.com' };
+  var PASSWORD = 'testpass';
+
+  beforeEach(function(done) {
+    User.remove({ username: 'testuser' }, function() {
+      User.register(USER, PASSWORD, done);
     });
   });
 
-  after(function(done) {
-    User.remove();
-
-    this.server.close(done);
+  afterEach(function(done) {
+    User.remove({ username: 'testuser' }, done);
   });
-};
 
-exports.login = function(browser, username, password) {
-  return browser.visit('/login').then(function() {
-    return browser
-      .fill('Username', username || 'user')
-      .fill('Password', password || 'pass')
-      .pressButton('Submit');
+  beforeEach(function(done) {
+    this.server = app.listen(3001, done);
   });
-};
 
-exports.assertTextContains = function(browser, selector, expected, message) {
-  var elements = browser.queryAll(selector);
-  assert(elements.length,
-    'Expected selector \'' + selector + '\' to return one or more elements');
-  var actual = elements.map(function(elem) {
-    return elem.textContent;
-  }).join('').trim().replace(/\s+/g, ' ');
-  message = message || 'Expected \'' + actual + '\' to contain \'' + expected + '\'';
-  assert(actual.indexOf(expected) >= 0, message);
+  afterEach(function() {
+    this.server.close();
+  });
+
 };
 
