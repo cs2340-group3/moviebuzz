@@ -8,7 +8,7 @@ describe('api/movies.js', function() {
   describe('rate movies', function() {
     it('Should be able to search movies', function(done){
       this.agent
-        .get('/search/gone girl')
+        .get('/search/gone%20girl')
         .expect(/Gone Girl/g) // See the name of the movie
         .expect(/moviePoster/g) // Show the poster
         .expect(200, done);
