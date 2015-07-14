@@ -6,9 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Movie Buzz</title>
   <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css"
+        href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
   <script src="/vendor/jquery/dist/jquery.min.js"></script>
   <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/js/hack-image-replace.js"></script>
 </head>
 
 <body>
@@ -16,7 +17,8 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -27,41 +29,66 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
       {{#if user}}
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Recent<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/recent/dvd">DVDs</a></li>
-            <li><a href="/recent/theaters">Theater Releases</a></li>
-          </ul>
-        </li>
-        <li><a href="/recommendations">Recommended Movies</a></li>
-      </ul>
-      <div class="col-sm-3 col-md-3">
-        <form id="navbar-search" class="navbar-form" role="search">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword">
-            <div class="input-group-btn">
-                <button id="searchButton" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Recent<span
+              class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/recent/dvd">DVDs</a></li>
+              <li><a href="/recent/theaters">Theater Releases</a></li>
+            </ul>
+          </li>
+          <li><a href="/recommendations">Recommended Movies</a></li>
+        </ul>
+        <div class="col-sm-3 col-md-3">
+          <form id="navbar-search" class="navbar-form" role="search">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword">
+
+              <div class="input-group-btn">
+                <button id="searchButton" class="btn btn-default" type="submit"><i
+                  class="glyphicon glyphicon-search"></i></button>
+              </div>
             </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
       {{/if}}
       <ul class="nav navbar-nav navbar-right">
         {{#with user}}
-          {{#if is_admin}}
-            <li><a href="/admin">Admin</a></li>
-          {{/if}}
-          <li><a href="/profile">{{username}}</a></li>
-          <li><a href="/logout">Logout</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">
+              <i class="fa fa-user"></i>
+              {{username}}
+              <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu">
+
+              <li><a href="/profile">
+                <i class="fa fa-pencil"></i>
+                Profile
+              </a></li>
+
+              {{#if is_admin}}
+                <li><a href="/admin"><i class="fa fa-users"></i> Admin Dashboard</a></li>
+              {{/if}}
+              
+              <li role="separator" class="divider"></li>
+              <li><a href="/logout">
+                <i class="fa fa-power-off"></i>
+                Log out
+              </a></li>
+            </ul>
+          </li>
         {{else}}
           <li><a id="loginButton" href="#login" data-toggle="modal" data-target="#loginModal">Login</a></li>
           <li><a id="registerButton" href="#register" data-toggle="modal" data-target="#registerModal">Register</a></li>
         {{/with}}
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
 </nav>
 
 <!-- Login Modal -->
@@ -104,7 +131,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="registerModalLabel">Register</h4>
       </div>
       <div class="modal-body">
@@ -112,25 +140,28 @@
         <div id="registerAlert" class="alert alert-warning hidden" role="alert"></div>
         <form action="/register" id="registerForm" method="post" data-toggle="validator" role="form">
           <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
           <div class="form-group">
             <label for="inputName" class="control-label">Username</label>
             <input type="text" data-error="The username must contain only letters and numbers"
-                 pattern="^[a-zA-Z0-9]+$" name="username" class="form-control" id="inputName" placeholder="GeorgeBurdell" required>
+                   pattern="^[a-zA-Z0-9]+$" name="username" class="form-control" id="inputName"
+                   placeholder="GeorgeBurdell" required>
+
             <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
             <label for="inputEmail" class="control-label">Email</label>
             <input class="form-control" type="email" id="inputEmail" placeholder="Email"
-                 pattern="^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~'](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~`'])*@[a-zA-Z0-9](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$"
-                 data-error="Bruh, that email address is invalid" name="email" required>
+                   pattern="^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~'](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~`'])*@[a-zA-Z0-9](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$"
+                   data-error="Bruh, that email address is invalid" name="email" required>
 
             <div class="help-block with-errors"></div>
           </div>
           <div class="form-group">
             <label for="inputPassword" class="control-label"
-                style="display: block">Password<span>&nbsp;(At least 6 characters)</span></label>
+                   style="display: block">Password<span>&nbsp;(At least 6 characters)</span></label>
             <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password"
-                name="password" required>
+                   name="password" required>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -144,7 +175,8 @@
     </div>
   </div>
 </div>
-  {{{body}}}
+{{{body}}}
+<script src="/js/hack-image-replace.js"></script>
 <script src="/vendor/bootstrap-validator/dist/validator.min.js"></script>
 <script src="/js/navbar.js"></script>
 </body>
