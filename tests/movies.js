@@ -5,15 +5,17 @@ describe('api/movies.js', function() {
   this.timeout(5000);
   lib.loginBeforeEach();
 
-  describe('rate movies', function() {
-    it('Should be able to search movies', function(done){
+  describe('search movies', function() {
+    it.skip('Should be able to search movies', function(done){
       this.agent
         .get('/search/gone girl')
         .expect(/Gone Girl/g) // See the name of the movie
         .expect(/moviePoster/g) // Show the poster
         .expect(200, done);
     });
+  });
 
+  describe('rate movies', function() {
     it('Should be able to rate movie', function(done){
       this.agent
         .post('/movie/771360861/rate')
