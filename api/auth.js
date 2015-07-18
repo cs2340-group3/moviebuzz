@@ -76,7 +76,7 @@ module.exports = {
         }
         if (err && err.code !== 11000) { // Other error
           return res.status(500).json({
-            message: err
+            message: err.message
             , csrfToken: req.csrfToken()
           });
         }
