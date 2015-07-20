@@ -72,7 +72,7 @@
               {{#if is_admin}}
                 <li><a href="/admin"><i class="fa fa-users"></i> Admin Dashboard</a></li>
               {{/if}}
-              
+
               <li role="separator" class="divider"></li>
               <li><a href="/logout">
                 <i class="fa fa-power-off"></i>
@@ -83,6 +83,7 @@
         {{else}}
           <li><a id="loginButton" href="#login" data-toggle="modal" data-target="#loginModal">Login</a></li>
           <li><a id="registerButton" href="#register" data-toggle="modal" data-target="#registerModal">Register</a></li>
+          <li><a id="bugReportButton" href="#bugReport" data-toggle="modal" data-target="#bugReportModal">Submit Bug Report</a></li>
         {{/with}}
       </ul>
     </div>
@@ -175,10 +176,36 @@
     </div>
   </div>
 </div>
+
+<!-- Bug Report Modal -->
+
+<div class="modal fade modal-lg" id="bugReportModal" tabindex="-1" role="dialog">
+  <div class="modal-content">
+    <div class="modal-header" align="center">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="registerModalLabel">Bug Report</h4>
+    </div>
+    <div class="modal-body">
+      <form action="/bugReport" id="bugForm" method="post" role="form">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+        <div class="form-group" align="center">
+          <label class="control-label" for="bugReportText" style="display: block"></label>
+            <textarea name="Text1" cols="100" rows="6" id="bugReportText" placeholder="Please be as detailed and specific as possible..." required></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
 {{{body}}}
 <script src="/js/hack-image-replace.js"></script>
 <script src="/vendor/bootstrap-validator/dist/validator.min.js"></script>
 <script src="/js/navbar.js"></script>
 </body>
 </html>
-
