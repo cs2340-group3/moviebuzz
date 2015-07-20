@@ -191,8 +191,9 @@
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
         <div class="form-group" align="center">
+          <input type="text" name="title" id="title" class="form-control" style="width:723px;" placeholder="Give your report a concise title..." required>
           <label class="control-label" for="bugReportText" style="display: block"></label>
-            <textarea name="Text1" cols="100" rows="6" id="bugReportText" placeholder="Please be as detailed and specific as possible..." required></textarea>
+            <textarea name="bugReportText" cols="100" rows="6" id="bugReportText" placeholder="Please be as detailed and specific as possible..." required></textarea>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Submit</button>
