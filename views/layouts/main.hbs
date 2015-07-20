@@ -54,6 +54,7 @@
         </div>
       {{/if}}
       <ul class="nav navbar-nav navbar-right">
+        <li><a id="bugReportButton" href="#bugReport" data-toggle="modal" data-target="#bugReportModal"><span title="Report a bug"><i class="fa fa-bug"></i></span></a></li>
         {{#with user}}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown">
@@ -83,7 +84,6 @@
         {{else}}
           <li><a id="loginButton" href="#login" data-toggle="modal" data-target="#loginModal">Login</a></li>
           <li><a id="registerButton" href="#register" data-toggle="modal" data-target="#registerModal">Register</a></li>
-          <li><a id="bugReportButton" href="#bugReport" data-toggle="modal" data-target="#bugReportModal">Submit Bug Report</a></li>
         {{/with}}
       </ul>
     </div>
@@ -179,26 +179,38 @@
 
 <!-- Bug Report Modal -->
 
-<div class="modal fade modal-lg" id="bugReportModal" tabindex="-1" role="dialog">
-  <div class="modal-content">
-    <div class="modal-header" align="center">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-        aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title" id="registerModalLabel">Bug Report</h4>
-    </div>
-    <div class="modal-body">
-      <form action="/bugReport" id="bugForm" method="post" role="form">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+<div class="modal fade" id="bugReportModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" align="center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="registerModalLabel">Bug Report</h4>
+      </div>
+      <div class="modal-body">
+        <form action="/bugReport" id="bugForm" method="post" role="form">
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-        <div class="form-group" align="center">
-          <input type="text" name="title" id="title" class="form-control" style="width:723px;" placeholder="Give your report a concise title..." required>
-          <label class="control-label" for="bugReportText" style="display: block"></label>
-            <textarea name="body" cols="100" rows="6" id="bugReportText" placeholder="Please be as detailed and specific as possible..." required></textarea>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
+          <div class="form-group" align="center">
+            <input type="text" name="title" class="form-control" placeholder="Give your report a concise title..." required>
+            <label class="control-label" for="bugReportText" style="display: block"></label>
+              <textarea name="body" rows="6" style="width: 100%" placeholder="Please be as detailed and specific as possible..." required></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+          <script>
+            $('#bugForm').submit(function() {
+              $.ajax({
+                type: 'POST',
+                url: '/bugReport',
+                data: { title: $(this).title.value, body: $(this).body.value }
+              });
+              return false;
+            });
+          </script>
+        </form>
+      </div>
     </div>
   </div>
 </div>

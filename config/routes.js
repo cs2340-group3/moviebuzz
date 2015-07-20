@@ -14,7 +14,7 @@ module.exports = function(app) {
   app.get('/', main.renderWelcomePage);
 
   var reportBug = require('../api/report-bug');
-  app.post('/reportBug', reportBug.submitBug);
+  app.post('/bugReport', reportBug.submitBug);
 
   var auth = require('../api/auth');
   app.use(express.Router()
