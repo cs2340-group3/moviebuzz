@@ -49,11 +49,12 @@ module.exports = function(app) {
     .put('/', admin.modifyUserStatus)
   );
 
-  var password = require('../api/reset');
+  var reset = require('../api/reset');
   app.use(express.Router()
-    .post('/reset', passport.requireAuth, password.resetPassword)
-    .get('/reset/:username', password.renderResetPage)
-    .post('/reset/:username', password.resetPassword)
+    .get('/recover/:username', reset.renderRecoverPage)
+    .post('/reset', passport.requireAuth, reset.resetPassword)
+    .post('/forgot', passport.requireAuth, reset.forgot)
+    .post('/reset/:username', reset.resetPassword)
   );
 };
 

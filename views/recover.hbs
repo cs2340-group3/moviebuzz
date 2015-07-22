@@ -1,0 +1,16 @@
+<div id="recoverAlert" class="alert alert-warning hidden" role="alert"></div>
+<form action="/reset" id="recoverForm" method="post" role="form">
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+  <div class="form-group">
+    <label for="inputRecPassword" class="control-label"
+           style="display: block">New Password<span>&nbsp;(at least 6 characters)</span></label>
+    <input type="password" class="form-control" id="inputRecPassword"
+           name="password" placeholder="Password" required>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+<script src="/js/recover.js"></script>

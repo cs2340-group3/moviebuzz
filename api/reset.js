@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var emailValid = require('email-validator');
 
 var reset = function (username, newPassword, cb) {
   User.findOne({ 'username': username }, function(err, user) {
@@ -17,9 +18,9 @@ var reset = function (username, newPassword, cb) {
 
 module.exports = {
 
-  // Render password recovery/reset page.
-  renderResetPage: function (req, res) {
-    return res.render('reset', {
+  // Render password recovery page.
+  renderRecoverPage: function (req, res) {
+    return res.render('recover', {
       user: req.user
       , csrfToken: req.csrfToken()
     });
@@ -44,10 +45,24 @@ module.exports = {
             , csrfToken: req.csrfToken()
           });
         }
-
+        // Success
         return res.status(200).json({});
       });
     }
+
+    if (req.params.username) { // Coming from Email recovery
+      // TODO
+    }
+  },
+
+  forgot: function (req, res) {
+    if (!req.body.email || !emailValid.validate(req.body.email)) {
+      return res.status(400).json({
+          message: "Not a valid email address"
+        , csrfToken: req.csrfToken()
+      });
+    }
+    // TODO
   }
 
 };
