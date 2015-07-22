@@ -3,10 +3,12 @@ var github = new (require('github'))({
   debug: true
 });
 
-github.authenticate({
-  type: 'oauth',
-  token: process.env.GITHUB_AUTH_TOKEN
-});
+if (process.env.GITHUB_AUTH_TOKEN) {
+  github.authenticate({
+    type: 'oauth',
+    token: process.env.GITHUB_AUTH_TOKEN
+  });
+}
 
 module.exports = {
   /**
