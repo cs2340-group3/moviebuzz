@@ -48,5 +48,12 @@ module.exports = function(app) {
     .delete('/', admin.deleteUser)
     .put('/', admin.modifyUserStatus)
   );
+
+  var password = require('../api/reset');
+  app.use(express.Router()
+    .post('/reset', passport.requireAuth, password.resetPassword)
+    .get('/reset/:username', password.renderResetPage)
+    .post('/reset/:username', password.resetPassword)
+  );
 };
 
