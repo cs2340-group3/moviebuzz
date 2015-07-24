@@ -26,6 +26,7 @@
     "bootstrap": "~3.3.4",
     "bootstrap-validator": "~0.8.1",
     "x-editable": "~1.5.1",
-    "raty": "~2.7.0"
+    "raty": "~2.7.0",
+    "bootstrap-social": "~4.9.1"
   }
 }

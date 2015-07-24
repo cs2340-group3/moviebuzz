@@ -7,8 +7,26 @@ var passport = require('passport');
 var expressSession = require('express-session');
 var User = require('../models/user');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: 'http://localhost:3000/auth/facebook/callback'
+  },
+  function(accessToken, refreshToken, profile, done) {
+    console.log(profile);
+    done(null, profile);
+    /*User.findOrCreate(, function(err, user) {
+      if (err) {
+        return done(err);
+      }
+      done(null, user);
+    });*/
+  }
+));
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -40,5 +58,10 @@ module.exports = function(app) {
 
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.get('/auth/facebook', passport.authenticate('facebook', {
+    scope: ['public_profile', 'email']
+  }));
+  app.get('/auth/facebook/callback', passport.authenticate('facebook'));
 };
 
